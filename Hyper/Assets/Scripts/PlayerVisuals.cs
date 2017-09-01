@@ -1,8 +1,22 @@
 ﻿using UnityEngine;
 
+
+public enum AnimationState
+{
+    Left,
+    Right,
+    Front,
+    Back,
+    Bonus,
+    Malus
+}
+
 public class PlayerVisuals : MonoBehaviour {
 
-    public Color32 playerColor;
+    public Color32 color1;
+    public Color32 color2;
+    public Color32 color3;
+    public Color32 color4;
 
     public GameObject playerController;
 
@@ -14,13 +28,53 @@ public class PlayerVisuals : MonoBehaviour {
 
     public bool gameOn;
 
+    public Animator anim;
+
 	// Use this for initialization
 	void Start () {
-        GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", playerColor);
-        Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", playerColor);
-        Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", playerColor);
+        SetColor(4);
 
 
+    }
+
+    public void PlayAnimation(AnimationState _animationState)
+    {
+        anim.SetTrigger(_animationState.ToString());
+    }
+
+    public void SetColor(int _playerIndex)
+    {
+        switch(_playerIndex)
+        {
+            case 1:
+        
+                    GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color1);
+                    Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color1);
+                    Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", color1);
+                    break;
+        
+            case 2:
+                
+                    GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color2);
+                    Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color2);
+                    Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", color2);
+                    break;
+                
+            case 3:
+                
+                    GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color3);
+                    Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color3);
+                    Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", color3);
+                    break;
+                
+            case 4:
+                
+                    GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color4);
+                    Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color4);
+                    Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", color4);
+                    break;
+                
+        }
     }
 
     void FixedUpdate()

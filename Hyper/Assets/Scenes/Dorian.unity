@@ -159,7 +159,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4517580247691070, guid: 358a1ad1ead91354999adaeb0d227b69, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.2
+      value: -2.88
       objectReference: {fileID: 0}
     - target: {fileID: 4517580247691070, guid: 358a1ad1ead91354999adaeb0d227b69, type: 2}
       propertyPath: m_LocalPosition.y
@@ -167,7 +167,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4517580247691070, guid: 358a1ad1ead91354999adaeb0d227b69, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2.43
+      value: 5.24
       objectReference: {fileID: 0}
     - target: {fileID: 4517580247691070, guid: 358a1ad1ead91354999adaeb0d227b69, type: 2}
       propertyPath: m_LocalRotation.x
@@ -188,6 +188,26 @@ Prefab:
     - target: {fileID: 4517580247691070, guid: 358a1ad1ead91354999adaeb0d227b69, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114798022428147358, guid: 358a1ad1ead91354999adaeb0d227b69,
+        type: 2}
+      propertyPath: color1.rgba
+      value: 4278210559
+      objectReference: {fileID: 0}
+    - target: {fileID: 114798022428147358, guid: 358a1ad1ead91354999adaeb0d227b69,
+        type: 2}
+      propertyPath: color2.rgba
+      value: 4282580774
+      objectReference: {fileID: 0}
+    - target: {fileID: 114798022428147358, guid: 358a1ad1ead91354999adaeb0d227b69,
+        type: 2}
+      propertyPath: color3.rgba
+      value: 4294907320
+      objectReference: {fileID: 0}
+    - target: {fileID: 114798022428147358, guid: 358a1ad1ead91354999adaeb0d227b69,
+        type: 2}
+      propertyPath: color4.rgba
+      value: 16769559
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 358a1ad1ead91354999adaeb0d227b69, type: 2}
@@ -321,7 +341,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.040116776, g: 0.06454848, b: 0.102941155, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -354,8 +374,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1302432671}
-  m_LocalRotation: {x: 0.32133433, y: -0.6234373, z: 0.31277367, w: 0.64050204}
-  m_LocalPosition: {x: 4.9050236, y: 8.189377, z: -0.2713954}
+  m_LocalRotation: {x: 0.4635814, y: -0.5342332, z: 0.46509454, w: 0.53232914}
+  m_LocalPosition: {x: -2.1329207, y: 8.844672, z: 3.137121}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
