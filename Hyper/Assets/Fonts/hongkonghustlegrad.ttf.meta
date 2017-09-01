@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: bd6aa963e8681c143988486a5ffc322c
+timeCreated: 1504307669
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Hong Kong Hustle Gradient
+  fontNames:
+  - Hong Kong Hustle Gradient
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
