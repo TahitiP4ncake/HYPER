@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 3e9935001da65a04eadbdb4331a6374d
+timeCreated: 1504287687
+licenseType: Free
+ShaderImporter:
+  defaultTextures:
+  - _Atlas: {fileID: 2800000, guid: 9b288c7a8e228ae498658e5fbcb4cc89, type: 3}
+  - _Mask1: {fileID: 2800000, guid: 36e7d9d87f90fe444a90f8354a463143, type: 3}
+  - _Mask2: {fileID: 2800000, guid: 146841eb4f6b966448a511744dd333db, type: 3}
+  - _Mask3: {fileID: 2800000, guid: 47c9ae5ebef1f0b41b13c29ad4984218, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
