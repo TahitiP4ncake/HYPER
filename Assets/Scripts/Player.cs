@@ -50,7 +50,11 @@ public class Player : MonoBehaviour {
 
 	bool isOnBonus = false;
 
+	Bonus bonus;
+
 	public bool canInterract = true;
+
+	public int turn=0;
 
 	void Start()
 	{
@@ -170,7 +174,6 @@ public class Player : MonoBehaviour {
 
 					if ( ( goInner && splineNumber == 0 ) || ( !goInner && splineNumber == 3 ) )
 					{
-
 						SetBack();
 					}
 				}
@@ -190,12 +193,14 @@ public class Player : MonoBehaviour {
 		else if(other.gameObject.tag == "Bonus")
 		{
 			isOnBonus = true;
+			bonus = other.gameObject.GetComponent<Bonus>();
 
 		}
 		else if (other.gameObject.tag == "Malus" && canMove)
 		{
 			StopAllCoroutines();
 			StartCoroutine(Malus());
+			bonus = other.gameObject.GetComponent<Bonus>();
 		}
 	}
 
@@ -229,8 +234,6 @@ public class Player : MonoBehaviour {
 				return;
 			}
 			visual.PlayAnimation(AnimationState.Left);
-
-			Debug.Log("RIGHT");
 		}
 		else
 		{
@@ -238,7 +241,6 @@ public class Player : MonoBehaviour {
 			{
 				return;
 			}
-			Debug.Log("LEFT");
 			visual.PlayAnimation(AnimationState.Right);
 		}
 
@@ -250,7 +252,6 @@ public class Player : MonoBehaviour {
 
 	public void SetBack()
 	{
-		Debug.Log(gameObject.name + " set Back");
 
 		ChangeSpline(!goInner);
 
@@ -288,6 +289,7 @@ public class Player : MonoBehaviour {
 				isOnBonus = false;
 				StopAllCoroutines();
 				StartCoroutine(Bonus());
+				bonus.Randomize();
 			}
 		}
 
@@ -340,25 +342,36 @@ public class Player : MonoBehaviour {
 	{
 		bonusSpeed = 2f;
 		SpeedCalcul();
-		Debug.Log("BOOST");
+
 
 		visual.PlayAnimation(AnimationState.Bonus);
 
 		yield return new WaitForSeconds(2);
-		Debug.Log("END BOOST");
+
 		bonusSpeed = 1f;
 		SpeedCalcul();
 	}
 
 	IEnumerator Malus()
 	{
+		bonus.Randomize();
+
 		bonusSpeed = 0.5f;
 		SpeedCalcul();
+
+		Debug.Log("MALUS");
 
 		visual.PlayAnimation(AnimationState.Malus);
 
 		yield return new WaitForSeconds(2);
 		bonusSpeed = 1f;
 		SpeedCalcul();
+	}
+
+	public void AddTurn()
+	{
+		turn++;
+
+
 	}
 }
