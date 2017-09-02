@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour {
 
     public Text timerText;
 
-    public bool gameOn = true;
+    public bool gameOn;
 
     public AnimationCurve sizeCurve;
 
@@ -15,34 +15,38 @@ public class Timer : MonoBehaviour {
 
     Vector3 startSize;
 
-	// Use this for initialization
 	void Start () {
         StartCoroutine(StartTimer());
-
         startSize = timerText.transform.localScale;
 	}
 	
-	// Update is called once per frame
 	void Update () {
-        timeStart += Time.deltaTime;
-        timerText.transform.localScale = startSize* sizeCurve.Evaluate(timeStart);
+        if (!gameOn)
+        {
+            timeStart += Time.deltaTime;
+            timerText.transform.localScale = startSize * sizeCurve.Evaluate(timeStart);
+        }
 	}
 
     public IEnumerator StartTimer()
     {
         timeStart = 0;
+        timerText   .transform.localScale = startSize * sizeCurve.Evaluate(timeStart);
         timerText.text = "3";
         yield return new WaitForSeconds(1);
+        timeStart = 0;
+        timerText.transform.localScale = startSize * sizeCurve.Evaluate(timeStart);
         timerText.text = "2";
-        timeStart = 0;
         yield return new WaitForSeconds(1);
+        timeStart = 0;
+        timerText.transform.localScale = startSize * sizeCurve.Evaluate(timeStart);
         timerText.text = "1";
-        timeStart = 0;
         yield return new WaitForSeconds(1);
-        timerText.text = "GO";
         timeStart = 0;
+        timerText.transform.localScale = startSize * sizeCurve.Evaluate(timeStart);
+        timerText.text = "GO";
         yield return new WaitForSeconds(1);
         timerText.text = "";
-        
+        gameOn = true;
     }
 }

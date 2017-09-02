@@ -263,6 +263,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4823343553889206, guid: 358a1ad1ead91354999adaeb0d227b69, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 358a1ad1ead91354999adaeb0d227b69, type: 2}
   m_IsPrefabParent: 0
@@ -467,15 +471,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 222647169}
-  gameOn: 1
+  gameOn: 0
   sizeCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: -0.5057132
-      value: 0.30236518
-      inSlope: 2.2345061
-      outSlope: 2.2345061
+      time: -0.49343753
+      value: 0.000058054924
+      inSlope: 0.020483647
+      outSlope: 0.020483647
+      tangentMode: 0
+    - serializedVersion: 2
+      time: -0.014910966
+      value: 0.026498413
+      inSlope: 0.0014348545
+      outSlope: 0.0014348545
       tangentMode: 0
     - serializedVersion: 2
       time: 1
