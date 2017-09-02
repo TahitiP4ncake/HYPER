@@ -23,7 +23,6 @@ public class PlayerVisuals : MonoBehaviour {
     public GameObject playerController;
 
     public GameObject Trail1;
-    public GameObject Trail2;
 
     [Space]
 
@@ -60,28 +59,28 @@ public class PlayerVisuals : MonoBehaviour {
         
                     GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color1);
                     Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color1);
-                    Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", color1);
+                  
                     break;
         
             case 1:
                 
                     GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color2);
                     Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color2);
-                    Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", color2);
+                  
                     break;
                 
             case 2:
                 
                     GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color3);
                     Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color3);
-                    Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", color3);
+                  
                     break;
                 
             case 3:
                 
                     GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color4);
                     Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color4);
-                    Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", color4);
+                    
                     break;
                 
         }
