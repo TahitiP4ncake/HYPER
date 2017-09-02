@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23404068113138204}
   - component: {fileID: 114742239514652070}
   - component: {fileID: 114511724184706650}
-  - component: {fileID: 54500368035913700}
+  - component: {fileID: 54604973513869378}
   m_Layer: 0
   m_Name: Player03
   m_TagString: Untagged
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1174554718327766}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -35.14}
+  m_LocalPosition: {x: 0, y: 0, z: -32.814735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1174554718327766}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54500368035913700
+--- !u!54 &54604973513869378
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -106,7 +106,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1174554718327766}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -195,7 +195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6202f518c0861a74584a2cf4aee549f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigid: {fileID: 0}
+  rigid: {fileID: 54604973513869378}
   controller: {fileID: 114511724184706650}
   playerIndex: 2
   speed: 0
+  visualsPrefab: {fileID: 1582375215814350, guid: 358a1ad1ead91354999adaeb0d227b69,
+    type: 2}
