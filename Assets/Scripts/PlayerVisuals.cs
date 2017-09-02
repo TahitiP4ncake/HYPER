@@ -56,28 +56,28 @@ public class PlayerVisuals : MonoBehaviour {
     {
         switch(_playerIndex)
         {
-            case 1:
+            case 0:
         
                     GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color1);
                     Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color1);
                     Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", color1);
                     break;
         
-            case 2:
+            case 1:
                 
                     GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color2);
                     Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color2);
                     Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", color2);
                     break;
                 
-            case 3:
+            case 2:
                 
                     GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color3);
                     Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color3);
                     Trail2.GetComponent<TrailRenderer>().material.SetColor("_Color", color3);
                     break;
                 
-            case 4:
+            case 3:
                 
                     GetComponentInChildren<Renderer>().material.SetColor("_Player_Color", color4);
                     Trail1.GetComponent<TrailRenderer>().material.SetColor("_Color", color4);
