@@ -54,8 +54,7 @@ Shader "Shader Forge/S_Bonus" {
             }
             float4 frag(VertexOutput i) : COLOR {
                 float4 node_18 = _Time + _TimeEditor;
-                float2 node_3961 = float2(i.uv0.r,(i.uv0.g*_U));
-                float2 node_4517 = (node_3961+(node_18.g*_scrollSpeed)*float2(0,-1));
+                float2 node_4517 = (float2(i.uv0.r,(i.uv0.g*_U))+(node_18.g*_scrollSpeed)*float2(0,-1));
                 float4 _Arrow_var = tex2D(_Arrow,TRANSFORM_TEX(node_4517, _Arrow));
                 clip(_Arrow_var.a - 0.5);
 ////// Lighting:
@@ -105,8 +104,7 @@ Shader "Shader Forge/S_Bonus" {
             }
             float4 frag(VertexOutput i) : COLOR {
                 float4 node_18 = _Time + _TimeEditor;
-                float2 node_3961 = float2(i.uv0.r,(i.uv0.g*_U));
-                float2 node_4517 = (node_3961+(node_18.g*_scrollSpeed)*float2(0,-1));
+                float2 node_4517 = (float2(i.uv0.r,(i.uv0.g*_U))+(node_18.g*_scrollSpeed)*float2(0,-1));
                 float4 _Arrow_var = tex2D(_Arrow,TRANSFORM_TEX(node_4517, _Arrow));
                 clip(_Arrow_var.a - 0.5);
                 SHADOW_CASTER_FRAGMENT(i)
