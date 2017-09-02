@@ -271,7 +271,7 @@ MonoBehaviour:
     rgba: 4294907320
   color4:
     serializedVersion: 2
-    rgba: 16769559
+    rgba: 4294959639
   playerController: {fileID: 0}
   Trail1: {fileID: 1382300243011634}
   smoothTime: 0.05
