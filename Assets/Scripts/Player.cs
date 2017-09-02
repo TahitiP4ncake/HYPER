@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
 
 	public float speed=0;
 
-	private float naturalSpeed = 5;
+	public float naturalSpeed = 5;
 
 	private float splineSpeed;
 
