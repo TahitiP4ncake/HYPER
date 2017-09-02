@@ -225,7 +225,7 @@ public class Player : MonoBehaviour {
 		StopAllCoroutines();
 		StartCoroutine(CooldowncanMove());
 
-
+		gamepad.AddRumble(1, Vector2.one, 1);
 
 		if (_inner)
 		{
@@ -246,6 +246,7 @@ public class Player : MonoBehaviour {
 
 		ChangeSpline(_inner);
 
+
 		
 
 	}
@@ -263,7 +264,7 @@ public class Player : MonoBehaviour {
 		Debug.Log(gameObject.name + " push");
 
 		visual.PlayAnimation(AnimationState.Back);
-
+		gamepad.AddRumble(1, Vector2.one, 1);
 	}
 
 	void Pushed()
@@ -354,6 +355,8 @@ public class Player : MonoBehaviour {
 
 	IEnumerator Malus()
 	{
+		gamepad.AddRumble(1, Vector2.one, 1);
+
 		bonus.Randomize();
 
 		bonusSpeed = 0.5f;
