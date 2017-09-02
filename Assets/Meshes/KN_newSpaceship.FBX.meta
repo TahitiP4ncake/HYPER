@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: bc9604e2fd5f1a14aae3ca1ab5d8d94a
-timeCreated: 1504285680
+guid: 2c61ebb6d13c74449965ee4c783e9289
+timeCreated: 1504350807
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -10,14 +10,13 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Spaceship
-    7400000: Player@Idle
-    7400002: Player@Impact
-    7400004: Player@BumpRight
-    7400006: Player@BumpLeft
-    7400008: Player@Bonus
-    7400010: Player@BumpFront
-    7400012: Player@BumpBack
-    7400014: Player@Malus
+    7400000: Spaceship@Idle
+    7400002: Spaceship@BumpRight
+    7400004: Spaceship@BumpLeft
+    7400006: Spaceship@Bonus
+    7400008: Spaceship@BumpFront
+    7400010: Spaceship@BumpBack
+    7400012: Spaceship@Malus
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -44,7 +43,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Player@Idle
+      name: Spaceship@Idle
       takeName: Take 001
       firstFrame: 0
       lastFrame: 10
@@ -72,35 +71,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Player@Impact
-      takeName: Take 001
-      firstFrame: 10
-      lastFrame: 60
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Player@BumpRight
+      name: Spaceship@BumpRight
       takeName: Take 001
       firstFrame: 60
       lastFrame: 80
@@ -128,7 +99,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Player@BumpLeft
+      name: Spaceship@BumpLeft
       takeName: Take 001
       firstFrame: 95
       lastFrame: 115
@@ -156,7 +127,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Player@Bonus
+      name: Spaceship@Bonus
       takeName: Take 001
       firstFrame: 120
       lastFrame: 147
@@ -184,7 +155,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Player@BumpFront
+      name: Spaceship@BumpFront
       takeName: Take 001
       firstFrame: 150
       lastFrame: 176
@@ -212,7 +183,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Player@BumpBack
+      name: Spaceship@BumpBack
       takeName: Take 001
       firstFrame: 180
       lastFrame: 211
@@ -240,7 +211,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Player@Malus
+      name: Spaceship@Malus
       takeName: Take 001
       firstFrame: 220
       lastFrame: 245
