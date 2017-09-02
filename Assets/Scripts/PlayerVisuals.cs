@@ -90,8 +90,12 @@ public class PlayerVisuals : MonoBehaviour {
     {
         if (gameOn)
         {
+            /*
             transform.position = Vector3.SmoothDamp(transform.position, playerController.transform.position, ref velocity, smoothTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, playerController.transform.rotation, Time.deltaTime * turnSpeed);
+            */
+            transform.position = playerController.transform.position;
+            transform.rotation = playerController.transform.rotation;
         }
     }
 }
