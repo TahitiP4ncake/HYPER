@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
 	float speedByTime =0.01f;
 
+	public int nbrOfLap = 20;
+
 
 	void Awake( )
 	{

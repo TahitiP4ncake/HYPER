@@ -56,6 +56,8 @@ public class Player : MonoBehaviour {
 
 	public int turn=0;
 
+	public int currentPosition;
+
 	void Start()
 	{
 		manager = GamepadManager.Instance;
@@ -374,7 +376,5 @@ public class Player : MonoBehaviour {
 	public void AddTurn()
 	{
 		turn++;
-
-
 	}
 }
