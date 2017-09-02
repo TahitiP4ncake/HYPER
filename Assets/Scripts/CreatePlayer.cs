@@ -16,10 +16,13 @@ public class CreatePlayer : MonoBehaviour {
     bool p2;
     bool p3;
     bool p4;
+    
 
     public int playerActive;
     // Use this for initialization
     void Start () {
+        
+
         manager = GamepadManager.Instance;
         switch(manager.actif)
         {
@@ -45,6 +48,11 @@ public class CreatePlayer : MonoBehaviour {
         gamepad1 = manager.GetGamepad(1);
     }
 	
+    void SetPlayer(int _playerIndex, int _gamepadIndex)
+    {
+        GameManager.instance.AddPlayer(_playerIndex, _gamepadIndex);
+    }
+
 	// Update is called once per frame
 	void Update () {
         CheckGamepad();
@@ -58,88 +66,88 @@ public class CreatePlayer : MonoBehaviour {
                 if (gamepad1.GetButtonDown("A") && !p1)
                 {
                     p1 = true;
-                    //instantiate
+                    SetPlayer(0, 1);
                 }
                 if (gamepad2.GetButtonDown("A") && !p2)
                 {
                     p2 = true;
-                    //instantiate
+                    SetPlayer(0, 2);
                 }
                 if (gamepad3.GetButtonDown("A") && !p3)
                 {
                     p3 = true;
-                    //instantiate
+                    SetPlayer(0, 3);
                 }
                 if (gamepad4.GetButtonDown("A") && !p4)
                 {
                     p4 = true;
-                    //instantiate
+                    SetPlayer(0, 4);
                 }
                 break;
             case 1:
                 if (gamepad1.GetButtonDown("A") && !p1)
                 {
                     p1 = true;
-                    //instantiate
+                    SetPlayer(1, 1);
                 }
                 if (gamepad2.GetButtonDown("A") && !p2)
                 {
                     p2 = true;
-                    //instantiate
+                    SetPlayer(1, 2);
                 }
                 if (gamepad3.GetButtonDown("A") && !p3)
                 {
                     p3 = true;
-                    //instantiate
+                    SetPlayer(1, 3);
                 }
                 if (gamepad4.GetButtonDown("A") && !p4)
                 {
                     p4 = true;
-                    //instantiate
+                    SetPlayer(1, 4);
                 }
                 break;
             case 2:
                 if (gamepad1.GetButtonDown("A") && !p1)
                 {
                     p1 = true;
-                    //instantiate
+                    SetPlayer(2, 1);
                 }
                 if (gamepad2.GetButtonDown("A") && !p2)
                 {
                     p2 = true;
-                    //instantiate
+                    SetPlayer(2, 2);
                 }
                 if (gamepad3.GetButtonDown("A") && !p3)
                 {
                     p3 = true;
-                    //instantiate
+                    SetPlayer(2, 3);
                 }
                 if (gamepad4.GetButtonDown("A") && !p4)
                 {
                     p4 = true;
-                    //instantiate
+                    SetPlayer(2, 4);
                 }
                 break;
             case 3:
                 if (gamepad1.GetButtonDown("A") && !p1)
                 {
                     p1 = true;
-                    //instantiate
+                    SetPlayer(3, 1);
                 }
                 if (gamepad2.GetButtonDown("A") && !p2)
                 {
                     p2 = true;
-                    //instantiate
+                    SetPlayer(3, 2);
                 }
                 if (gamepad3.GetButtonDown("A") && !p3)
                 {
                     p3 = true;
-                    //instantiate
+                    SetPlayer(3, 3);
                 }
                 if (gamepad4.GetButtonDown("A") && !p4)
                 {
                     p4 = true;
-                    //instantiate
+                    SetPlayer(3, 4);
                 }
                 break;
         }
