@@ -37,17 +37,23 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	void Start()
-	 {
-		foreach(Player _player in players)
+	public void AddPlayer(int _playerIndex, int _gpIndex)
+	{
+		players [_playerIndex].gameObject.SetActive(true);
+
+		players [_playerIndex].SetPlayer(_playerIndex, _gpIndex);
+	}
+	
+	public void StartRace()
+	{
+		foreach ( Player _player in players )
 		{
 			_player.StartRace();
 		}
 
 		StartCoroutine(SpeedTime());
+	}
 
-	 }
-	
 	
 
 	IEnumerator SpeedTime()
