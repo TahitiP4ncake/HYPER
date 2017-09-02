@@ -62,14 +62,21 @@ public class Player : MonoBehaviour {
 	{
 		manager = GamepadManager.Instance;
 
-		gamepad = manager.GetGamepad(playerIndex+1);
+		
+
+	}
+
+	public void SetPlayer(int _playerIndex, int _gpIndex)
+	{
+		playerIndex = _playerIndex;
+		
+		gamepad = manager.GetGamepad(_gpIndex);
 
 		GameObject _go = Instantiate(visualsPrefab);
 
 		visual = _go.GetComponent<PlayerVisuals>();
 
 		visual.SetPlayer(gameObject, playerIndex);
-
 	}
 
 	public void StartRace()
