@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
 
 	private float splineSpeed;
 
-	private float boosterSpeed = 1;
+	private float bonusSpeed = 1;
 
 	private float timeSpeed = 1;
 
@@ -37,8 +37,6 @@ public class Player : MonoBehaviour {
 	#endregion
 
 	public GameObject visualsPrefab;
-
-	public BoxCollider colliderBox;
 
 	PlayerVisuals visual;
 
@@ -49,6 +47,8 @@ public class Player : MonoBehaviour {
 	bool isMoving = false;
 
 	bool goInner = false;
+
+	bool isOnBonus = false;
 
 	public bool canInterract = true;
 
@@ -128,7 +128,7 @@ public class Player : MonoBehaviour {
 
 		calculSpeed = naturalSpeed * splineSpeed * timeSpeed;
 
-		calculSpeed *= boosterSpeed;
+		calculSpeed += bonusSpeed*calculSpeed;
 
 		speed = calculSpeed;
 	}
@@ -142,12 +142,12 @@ public class Player : MonoBehaviour {
 
 	public void AddBonus(float _bonus)
 	{
-		boosterSpeed = 1 + _bonus;
+		bonusSpeed = 1 + _bonus;
 	}
 
 	public void AddMalus(float _malus)
 	{
-		boosterSpeed = 1 - _malus;
+		bonusSpeed = 1 - _malus;
 	}
 
 	void StopMoving()
@@ -157,38 +157,66 @@ public class Player : MonoBehaviour {
 
 	void OnTriggerEnter( Collider other )
 	{
-		Player _player = other.gameObject.GetComponent<Player>();
-
-		if ( isMoving)
+		if ( other.gameObject.tag == "Player" )
 		{
-			if ( _player.isMoving ==false)
-			{
-				_player.Collided(goInner);
 
-				if((goInner && splineNumber == 0) || ( !goInner && splineNumber == 3 ))
+			Player _player = other.gameObject.GetComponent<Player>();
+
+			if ( isMoving )
+			{
+				if ( _player.isMoving == false )
 				{
-					
-					SetBack();
+					_player.Collided(goInner);
+
+					if ( ( goInner && splineNumber == 0 ) || ( !goInner && splineNumber == 3 ) )
+					{
+
+						SetBack();
+					}
+				}
+			} // Je te rentre dedans par derriere
+			else if ( isMoving == false && _player.isMoving == false )
+			{
+				if ( controller.RelativePosition > _player.controller.RelativePosition )
+				{
+					Pushed();
+				}
+				else
+				{
+					Pushing();
 				}
 			}
-		} // Je te rentre dedans par derriere
-		else if(isMoving==false && _player.isMoving == false )
-		{
-			if( controller.RelativePosition > _player.controller.RelativePosition )
-			{
-				Pushed();
-			}
-			else
-			{
-				Pushing();
-			}
 		}
+		else if(other.gameObject.tag == "Bonus")
+		{
+			isOnBonus = true;
 
+		}
+		else if (other.gameObject.tag == "Malus" && canMove)
+		{
+			StopAllCoroutines();
+			StartCoroutine(Malus());
+		}
 	}
+
+	void OnTriggerExit( Collider other )
+	{
+		if ( other.gameObject.tag == "Bonus" )
+		{
+			isOnBonus = false;
+
+		}
+	}	
+
 
 	// Coté
 	public void Collided(bool _inner)
 	{
+		if(canMove==false)
+		{
+			return;
+		}
+
 		Debug.Log(gameObject.name + " is collide");
 
 		if(_inner)
@@ -208,6 +236,9 @@ public class Player : MonoBehaviour {
 
 		ChangeSpline(_inner);
 
+		StopAllCoroutines();
+		StartCoroutine(CooldowncanMove());
+
 	}
 
 	public void SetBack()
@@ -222,6 +253,8 @@ public class Player : MonoBehaviour {
 	void Pushing()
 	{
 		Debug.Log(gameObject.name + " push");
+
+		StartCoroutine(CooldowncanMove());
 	}
 
 	void Pushed()
@@ -236,7 +269,12 @@ public class Player : MonoBehaviour {
 
 		if ( gamepad.GetButtonDown("A") )
 		{
-			Debug.Log("oui");
+			if(isOnBonus && canMove)
+			{
+				isOnBonus = false;
+				StopAllCoroutines();
+				StartCoroutine(Bonus());
+			}
 		}
 
 		if ( canSwitch )
@@ -267,5 +305,34 @@ public class Player : MonoBehaviour {
 				canSwitch = true;
 			}
 		}
+	}
+
+	IEnumerator CooldowncanMove()
+	{
+		canMove = false;
+
+		yield return new WaitForSeconds(0.5f);
+
+		canMove = true;
+	}
+
+	IEnumerator Bonus()
+	{
+		bonusSpeed = 2f;
+		SpeedCalcul();
+		Debug.Log("BOOST");
+		yield return new WaitForSeconds(2);
+		Debug.Log("END BOOST");
+		bonusSpeed = 1f;
+		SpeedCalcul();
+	}
+
+	IEnumerator Malus()
+	{
+		bonusSpeed = 0.5f;
+		SpeedCalcul();
+		yield return new WaitForSeconds(2);
+		bonusSpeed = 1f;
+		SpeedCalcul();
 	}
 }
