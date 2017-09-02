@@ -38,9 +38,19 @@ public class Player : MonoBehaviour {
 
 	public GameObject visualsPrefab;
 
+	public BoxCollider colliderBox;
+
 	PlayerVisuals visual;
 
+	bool canMove = false;
+
 	bool canSwitch = false;
+
+	bool isMoving = false;
+
+	bool goInner = false;
+
+	public bool canInterract = true;
 
 	void Start()
 	{
@@ -60,20 +70,33 @@ public class Player : MonoBehaviour {
 	{
 		splineNumber = playerIndex;
 		canSwitch = true;
+		canMove = true;
 	}
 
 	public void ChangeSpline(bool _inner)
 	{
-		if(_inner)
+		if( canInterract == false)
 		{
+			return;
+		}
+
+		if (_inner)
+		{
+
 			if(splineNumber ==0)
 			{
 				return;
 			}
 
+			goInner = true;
+
 			splineNumber--;
 
 			controller.SwitchTo(GameManager.instance.splines[splineNumber], controller.RelativePosition, 0.1f);
+
+			isMoving = true;
+
+			Invoke("StopMoving", 0.1f);
 
 		}
 		else
@@ -83,9 +106,16 @@ public class Player : MonoBehaviour {
 				return;
 			}
 
+			goInner = false;
+
 			splineNumber++;
 
 			controller.SwitchTo(GameManager.instance.splines [splineNumber], controller.RelativePosition, 0.1f);
+
+
+			isMoving = true;
+
+			Invoke("StopMoving", 0.1f);
 		}
 
 		SpeedCalcul();
@@ -120,6 +150,85 @@ public class Player : MonoBehaviour {
 		boosterSpeed = 1 - _malus;
 	}
 
+	void StopMoving()
+	{
+		isMoving = false;
+	}
+
+	void OnTriggerEnter( Collider other )
+	{
+		Player _player = other.gameObject.GetComponent<Player>();
+
+		if ( isMoving)
+		{
+			if ( _player.isMoving ==false)
+			{
+				_player.Collided(goInner);
+
+				if((goInner && splineNumber == 0) || ( !goInner && splineNumber == 3 ))
+				{
+					
+					SetBack();
+				}
+			}
+		} // Je te rentre dedans par derriere
+		else if(isMoving==false && _player.isMoving == false )
+		{
+			if( controller.RelativePosition > _player.controller.RelativePosition )
+			{
+				Pushed();
+			}
+			else
+			{
+				Pushing();
+			}
+		}
+
+	}
+
+	// Coté
+	public void Collided(bool _inner)
+	{
+		Debug.Log(gameObject.name + " is collide");
+
+		if(_inner)
+		{
+			if(splineNumber == 0)
+			{
+				return;
+			}
+		}
+		else
+		{
+			if ( splineNumber == 3 )
+			{
+				return;
+			}
+		}
+
+		ChangeSpline(_inner);
+
+	}
+
+	public void SetBack()
+	{
+		Debug.Log(gameObject.name + " set Back");
+
+		ChangeSpline(!goInner);
+
+	}
+
+	// par devant par derriere
+	void Pushing()
+	{
+		Debug.Log(gameObject.name + " push");
+	}
+
+	void Pushed()
+	{
+		Debug.Log(gameObject.name + " is pushed");
+	}
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -132,17 +241,23 @@ public class Player : MonoBehaviour {
 
 		if ( canSwitch )
 		{
-
-			if ( gamepad.GetStick_L().X >= 0.9f )
+			if ( canMove )
 			{
-				ChangeSpline(false);
-				canSwitch = false;
-			}
+				if ( gamepad.GetStick_L().X >= 0.9f )
+				{
+					goInner = false;
+					ChangeSpline(false);
+					canSwitch = false;
+					
+				}
 
-			if ( gamepad.GetStick_L().X <= -0.9f )
-			{
-				ChangeSpline(true);
-				canSwitch = false;
+				if ( gamepad.GetStick_L().X <= -0.9f )
+				{
+					goInner = true;
+					ChangeSpline(true);
+					canSwitch = false;
+					
+				}
 			}
 		}
 		else
