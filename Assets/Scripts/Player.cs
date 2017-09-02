@@ -217,14 +217,20 @@ public class Player : MonoBehaviour {
 			return;
 		}
 
-		Debug.Log(gameObject.name + " is collide");
+		StopAllCoroutines();
+		StartCoroutine(CooldowncanMove());
 
-		if(_inner)
+
+
+		if (_inner)
 		{
 			if(splineNumber == 0)
 			{
 				return;
 			}
+			visual.PlayAnimation(AnimationState.Left);
+
+			Debug.Log("RIGHT");
 		}
 		else
 		{
@@ -232,12 +238,13 @@ public class Player : MonoBehaviour {
 			{
 				return;
 			}
+			Debug.Log("LEFT");
+			visual.PlayAnimation(AnimationState.Right);
 		}
 
 		ChangeSpline(_inner);
 
-		StopAllCoroutines();
-		StartCoroutine(CooldowncanMove());
+		
 
 	}
 
@@ -254,12 +261,19 @@ public class Player : MonoBehaviour {
 	{
 		Debug.Log(gameObject.name + " push");
 
-		StartCoroutine(CooldowncanMove());
+		visual.PlayAnimation(AnimationState.Back);
+
 	}
 
 	void Pushed()
 	{
 		Debug.Log(gameObject.name + " is pushed");
+
+		visual.PlayAnimation(AnimationState.Front);
+
+		StopAllCoroutines();
+		StartCoroutine(Bonus());
+
 	}
 
 	// Update is called once per frame
@@ -311,7 +325,13 @@ public class Player : MonoBehaviour {
 	{
 		canMove = false;
 
+		bonusSpeed = 0.5f;
+		SpeedCalcul();
+
 		yield return new WaitForSeconds(0.5f);
+
+		bonusSpeed = 1f;
+		SpeedCalcul();
 
 		canMove = true;
 	}
@@ -321,6 +341,9 @@ public class Player : MonoBehaviour {
 		bonusSpeed = 2f;
 		SpeedCalcul();
 		Debug.Log("BOOST");
+
+		visual.PlayAnimation(AnimationState.Bonus);
+
 		yield return new WaitForSeconds(2);
 		Debug.Log("END BOOST");
 		bonusSpeed = 1f;
@@ -331,6 +354,9 @@ public class Player : MonoBehaviour {
 	{
 		bonusSpeed = 0.5f;
 		SpeedCalcul();
+
+		visual.PlayAnimation(AnimationState.Malus);
+
 		yield return new WaitForSeconds(2);
 		bonusSpeed = 1f;
 		SpeedCalcul();
