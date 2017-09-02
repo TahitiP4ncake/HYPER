@@ -32,7 +32,7 @@ public class PlayerVisuals : MonoBehaviour {
     public float turnSpeed;
 
     [Space]
-    public bool gameOn;
+    public bool gameOn = true;
 
     public Animator anim;
 
