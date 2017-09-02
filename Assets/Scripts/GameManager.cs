@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
 
 	public static GameManager instance = null;
 
+	float speedByTime =0.01f;
+
+
 	void Awake( )
 	{
 		//Check if instance already exists
@@ -38,7 +41,25 @@ public class GameManager : MonoBehaviour
 		{
 			_player.StartRace();
 		}
-	 }
 
+		StartCoroutine(SpeedTime());
+
+	 }
+	
+	
+
+	IEnumerator SpeedTime()
+	{
+		while(true)
+		{
+			yield return new WaitForSeconds(1);
+
+			foreach(Player _player in players)
+			{
+				_player.AddSpeedTime(speedByTime);
+			}
+
+		}
+	}
 
 }

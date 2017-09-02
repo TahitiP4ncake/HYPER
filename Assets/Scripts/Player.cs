@@ -15,6 +15,8 @@ public class Player : MonoBehaviour {
 
 	public int playerIndex;
 
+	#region Speed
+
 	public float speed=0;
 
 	private float naturalSpeed = 5;
@@ -27,10 +29,11 @@ public class Player : MonoBehaviour {
 
 	private float calculSpeed;
 
+	#endregion
+
 	public GameObject visualsPrefab;
 
 	PlayerVisuals visual;
-
 
 	void Start()
 	{
@@ -42,16 +45,9 @@ public class Player : MonoBehaviour {
 
 	}
 
-
-
 	public void StartRace()
 	{
-
 		splineNumber = playerIndex;
-
-		SpeedCalcul();
-
-
 	}
 
 	public void ChangeSpline(bool _inner)
@@ -80,7 +76,7 @@ public class Player : MonoBehaviour {
 			controller.SwitchTo(GameManager.instance.splines [splineNumber], controller.RelativePosition, 0.1f);
 		}
 
-
+		SpeedCalcul();
 
 	}
 
@@ -88,15 +84,28 @@ public class Player : MonoBehaviour {
 	{
 		splineSpeed = 1.0f + ( (3.0f - splineNumber)/100.0f);
 
-		Debug.Log(splineSpeed);
-
 		calculSpeed = naturalSpeed * splineSpeed * timeSpeed;
 
 		calculSpeed *= boosterSpeed;
 
 		speed = calculSpeed;
+	}
 
-		//controller.Speed = speed;
+	public void AddSpeedTime(float _addSpeed)
+	{
+		timeSpeed += _addSpeed;
+
+		SpeedCalcul();
+	}
+
+	public void AddBonus(float _bonus)
+	{
+		boosterSpeed = 1 + _bonus;
+	}
+
+	public void AddMalus(float _malus)
+	{
+		boosterSpeed = 1 - _malus;
 	}
 
 	// Update is called once per frame
@@ -104,9 +113,7 @@ public class Player : MonoBehaviour {
 	{
 		controller.Speed = Mathf.Lerp(controller.Speed, speed, Time.deltaTime);
 
-		if ( rigid != null )
-		{
-			Debug.Log(rigid.velocity.magnitude);
-		}
+
+
 	}
 }
