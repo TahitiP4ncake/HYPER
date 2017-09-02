@@ -27,16 +27,22 @@ public class Player : MonoBehaviour {
 
 	private float calculSpeed;
 
-	/*
-	public void SetUpPlayer(CurvySpline _spline, int _number)
-	{ 
+	public GameObject visualsPrefab;
 
-		controller.SwitchTo(_spline, controller.RelativePosition, 0f);
+	PlayerVisuals visual;
 
-		splineNumber = _number;
 
-		playerIndex = _number; 
-	}*/
+	void Start()
+	{
+		GameObject _go = Instantiate(visualsPrefab);
+
+		visual = _go.GetComponent<PlayerVisuals>();
+
+		visual.SetPlayer(gameObject, playerIndex);
+
+	}
+
+
 
 	public void StartRace()
 	{
