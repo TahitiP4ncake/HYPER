@@ -18,23 +18,33 @@ public class PlayerVisuals : MonoBehaviour {
     public Color32 color3;
     public Color32 color4;
 
+    [Space]
+
     public GameObject playerController;
 
     public GameObject Trail1;
     public GameObject Trail2;
 
+    [Space]
+
     Vector3 velocity = Vector3.zero;
     public float smoothTime;
+    public float turnSpeed;
 
+    [Space]
     public bool gameOn;
 
     public Animator anim;
 
 	// Use this for initialization
 	void Start () {
-        SetColor(4);
+       // SetColor(4);
+    }
 
-
+    public void SetPlayer(GameObject _playerController, int _playerIndex)
+    {
+        playerController = _playerController;
+        SetColor(_playerIndex);
     }
 
     public void PlayAnimation(AnimationState _animationState)
@@ -82,6 +92,7 @@ public class PlayerVisuals : MonoBehaviour {
         if (gameOn)
         {
             transform.position = Vector3.SmoothDamp(transform.position, playerController.transform.position, ref velocity, smoothTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, playerController.transform.rotation, Time.deltaTime * turnSpeed);
         }
     }
 }
