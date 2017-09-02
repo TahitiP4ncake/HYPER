@@ -5,7 +5,12 @@ using UnityEngine;
 using FluffyUnderware.Curvy.Controllers;
 using FluffyUnderware.Curvy;
 
+using XInputDotNetPure;
+
 public class Player : MonoBehaviour {
+
+	public x360_Gamepad gamepad;
+	private GamepadManager manager;
 
 	public Rigidbody rigid;
 
@@ -35,8 +40,14 @@ public class Player : MonoBehaviour {
 
 	PlayerVisuals visual;
 
+	bool canSwitch = false;
+
 	void Start()
 	{
+		manager = GamepadManager.Instance;
+
+		gamepad = manager.GetGamepad(playerIndex+1);
+
 		GameObject _go = Instantiate(visualsPrefab);
 
 		visual = _go.GetComponent<PlayerVisuals>();
@@ -48,6 +59,7 @@ public class Player : MonoBehaviour {
 	public void StartRace()
 	{
 		splineNumber = playerIndex;
+		canSwitch = true;
 	}
 
 	public void ChangeSpline(bool _inner)
@@ -113,7 +125,32 @@ public class Player : MonoBehaviour {
 	{
 		controller.Speed = Mathf.Lerp(controller.Speed, speed, Time.deltaTime);
 
+		if ( gamepad.GetButtonDown("A") )
+		{
+			Debug.Log("oui");
+		}
 
+		if ( canSwitch )
+		{
 
+			if ( gamepad.GetStick_L().X >= 0.9f )
+			{
+				ChangeSpline(false);
+				canSwitch = false;
+			}
+
+			if ( gamepad.GetStick_L().X <= -0.9f )
+			{
+				ChangeSpline(true);
+				canSwitch = false;
+			}
+		}
+		else
+		{
+			if ( gamepad.GetStick_L().X <= 0.1f && gamepad.GetStick_L().X >= -0.1f )
+			{
+				canSwitch = true;
+			}
+		}
 	}
 }
