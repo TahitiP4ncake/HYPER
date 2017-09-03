@@ -54,12 +54,16 @@ public class UI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+	DefineRanking();
+
 		for(int i = 0; i < players.Count; i++)
 		{
 			laps[i].text = players[i].turn.ToString() + " / " + GameManager.instance.nbrOfLap.ToString();
 
 			scores [i].text = "#" + players [i].currentPosition.ToString();
 		}
+
+		
 	}
 
 	void DefineRanking()
@@ -73,7 +77,7 @@ public class UI : MonoBehaviour {
 
 		for(int i =0; i<playerSorts.Count; i++)
 		{
-			playerSorts [i].player.currentPosition = i+1;
+			playerSorts [i].player.currentPosition = 4 - i;
 		}
 
 	}
@@ -97,7 +101,7 @@ public class UI : MonoBehaviour {
 	public void WaitForCompt()
 	{
 		pressAPanels.SetActive(false);
-		Invoke("DisplayGamePanel", 3);
+		Invoke("DisplayGamePanel", 4);
 	}
 
 	void DisplayGamePanel()

@@ -66,11 +66,15 @@ public class Player : MonoBehaviour {
 
 	}
 
+
 	public void SetPlayer(int _playerIndex, int _gpIndex)
 	{
 		playerIndex = _playerIndex;
-		
+
+		manager = GamepadManager.Instance;
 		gamepad = manager.GetGamepad(_gpIndex);
+
+		gamepad.AddRumble(1, Vector2.one, 0.5f);
 
 		GameObject _go = Instantiate(visualsPrefab);
 
@@ -375,8 +379,6 @@ public class Player : MonoBehaviour {
 
 		bonusSpeed = 0.5f;
 		SpeedCalcul();
-
-		Debug.Log("MALUS");
 
 		visual.PlayAnimation(AnimationState.Malus);
 
