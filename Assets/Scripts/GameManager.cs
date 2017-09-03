@@ -55,13 +55,19 @@ public class GameManager : MonoBehaviour
 			Destroy(gameObject);
 		}
 
+        
+	}
+
+    private void Start()
+    {
         a_win = Harmony.SetSource("Win");
         a_theme = Harmony.SetSource("theme1");
         a_theme.loop = true;
         Harmony.Play(a_theme);
-	}
+    }
 
-	public void AddPlayer(int _playerIndex, int _gpIndex)
+
+    public void AddPlayer(int _playerIndex, int _gpIndex)
 	{
 		players [_playerIndex].gameObject.SetActive(true);
 
