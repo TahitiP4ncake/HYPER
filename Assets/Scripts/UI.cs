@@ -27,12 +27,18 @@ public class UI : MonoBehaviour {
 
 	public List<playerSort> playerSorts = new List<playerSort>();
 
+	public List<GameObject> panels = new List<GameObject>();
+
+	public GameObject pressAPanels;
+
 	// Use this for initialization
 	void Start () 
 	{
 		playerSorts.Clear();
 
-		foreach(Player _player in players)
+		DisplayPressA();
+
+		foreach (Player _player in players)
 		{
 			playerSort _sort = new playerSort();
 			_sort.player = _player;
@@ -48,12 +54,16 @@ public class UI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+	DefineRanking();
+
 		for(int i = 0; i < players.Count; i++)
 		{
 			laps[i].text = players[i].turn.ToString() + " / " + GameManager.instance.nbrOfLap.ToString();
 
 			scores [i].text = "#" + players [i].currentPosition.ToString();
 		}
+
+		
 	}
 
 	void DefineRanking()
@@ -67,9 +77,39 @@ public class UI : MonoBehaviour {
 
 		for(int i =0; i<playerSorts.Count; i++)
 		{
-			playerSorts [i].player.currentPosition = i+1;
+			playerSorts [i].player.currentPosition = 4 - i;
 		}
 
+	}
+
+	public void DisplayPressA()
+	{
+		pressAPanels.SetActive(true);
+
+		foreach(GameObject _go in panels)
+		{
+			_go.SetActive(false);
+		}
+
+	}
+
+	public void SetPlayerUI()
+	{
+		pressAs [GameManager.instance.nbrPlayer - 1].text = "PLAYER #" + GameManager.instance.nbrPlayer;
+	}
+
+	public void WaitForCompt()
+	{
+		pressAPanels.SetActive(false);
+		Invoke("DisplayGamePanel", 4);
+	}
+
+	void DisplayGamePanel()
+	{
+		for(int i =0; i<GameManager.instance.nbrPlayer; i++)
+		{
+			panels [i].SetActive(true);
+		}
 	}
 
 }

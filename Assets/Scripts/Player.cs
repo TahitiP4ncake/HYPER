@@ -9,7 +9,7 @@ using XInputDotNetPure;
 
 public class Player : MonoBehaviour {
 
-	public x360_Gamepad gamepad;
+	public x360_Gamepad gamepad = null;
 	private GamepadManager manager;
 
 	public Rigidbody rigid;
@@ -66,11 +66,15 @@ public class Player : MonoBehaviour {
 
 	}
 
+
 	public void SetPlayer(int _playerIndex, int _gpIndex)
 	{
 		playerIndex = _playerIndex;
-		
+
+		manager = GamepadManager.Instance;
 		gamepad = manager.GetGamepad(_gpIndex);
+
+		gamepad.AddRumble(1, Vector2.one, 0.5f);
 
 		GameObject _go = Instantiate(visualsPrefab);
 
@@ -290,6 +294,11 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if(gamepad==null)
+		{
+			return;
+		}
+
 		controller.Speed = Mathf.Lerp(controller.Speed, speed, Time.deltaTime);
 
 		if ( gamepad.GetButtonDown("A") )
@@ -370,8 +379,6 @@ public class Player : MonoBehaviour {
 
 		bonusSpeed = 0.5f;
 		SpeedCalcul();
-
-		Debug.Log("MALUS");
 
 		visual.PlayAnimation(AnimationState.Malus);
 

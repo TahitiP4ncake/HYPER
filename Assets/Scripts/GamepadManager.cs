@@ -28,9 +28,11 @@ public class GamepadManager : MonoBehaviour {
 
             gamepads = new List<x360_Gamepad>();
 
-            // Create specified number of gamepad instances
-            for (int i = 0; i < GamepadCount; ++i)
-                gamepads.Add(new x360_Gamepad(i + 1));
+			// Create specified number of gamepad instances
+			for ( int i = 0; i < GamepadCount; ++i )
+			{
+				gamepads.Add(new x360_Gamepad(i + 1));
+			}	
         }
     }
 
@@ -64,13 +66,17 @@ public class GamepadManager : MonoBehaviour {
     // (Pass index of desired gamepad, eg. 1)
     public x360_Gamepad GetGamepad(int index)
     {
-        for (int i = 0; i < gamepads.Count;)
+
+
+		for (int i = 0; i < gamepads.Count;)
         {
-            // Indexes match, return this gamepad
-            if (gamepads[i].Index == (index - 1))
-                return gamepads[i];
-            else
-                ++i;
+			// Indexes match, return this gamepad
+			if ( gamepads [i].Index == ( index - 1 ) )
+			{
+				return gamepads [i];
+			}
+			else
+				++i;
         }
 
         Debug.LogError("[GamepadManager]: " + index + " is not a valid gamepad index!");
@@ -84,10 +90,12 @@ public class GamepadManager : MonoBehaviour {
 
         for (int i = 0; i < gamepads.Count; ++i)
         {
-            if (gamepads[i].IsConnected)
-                total++;
+			if ( gamepads [i].IsConnected )
+			{
+				total++;
+			}
         }
-
+		
         return total;
     }
     // Check across all gamepads for button press.

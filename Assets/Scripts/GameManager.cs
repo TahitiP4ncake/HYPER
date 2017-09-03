@@ -6,7 +6,7 @@ using FluffyUnderware.Curvy;
 
 public class GameManager : MonoBehaviour
 {
-	private int nbrPlayer = 4;
+	public int nbrPlayer = 0;
 
 	public List<Player> players = new List<Player>();
 
@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
 	float speedByTime =0.01f;
 
 	public int nbrOfLap = 20;
+
+	public UI ui;
+
+	public Timer timer;
 
 
 	void Awake( )
@@ -42,10 +46,24 @@ public class GameManager : MonoBehaviour
 		players [_playerIndex].gameObject.SetActive(true);
 
 		players [_playerIndex].SetPlayer(_playerIndex, _gpIndex);
+
+		nbrPlayer++;
+
+		ui.SetPlayerUI();
+
 	}
 	
 	public void StartRace()
 	{
+		timer.StartGame();
+		Invoke("TrueRaceBegin",3);
+		ui.WaitForCompt();
+	}
+
+	void TrueRaceBegin()
+	{
+		
+
 		foreach ( Player _player in players )
 		{
 			_player.StartRace();
@@ -53,7 +71,6 @@ public class GameManager : MonoBehaviour
 
 		StartCoroutine(SpeedTime());
 	}
-
 	
 
 	IEnumerator SpeedTime()
