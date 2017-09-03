@@ -28,9 +28,11 @@ public class GamepadManager : MonoBehaviour {
 
             gamepads = new List<x360_Gamepad>();
 
-            // Create specified number of gamepad instances
-            for (int i = 0; i < GamepadCount; ++i)
-                gamepads.Add(new x360_Gamepad(i + 1));
+			// Create specified number of gamepad instances
+			for ( int i = 0; i < GamepadCount; ++i )
+			{
+				gamepads.Add(new x360_Gamepad(i + 1));
+			}	
         }
     }
 
@@ -84,10 +86,13 @@ public class GamepadManager : MonoBehaviour {
 
         for (int i = 0; i < gamepads.Count; ++i)
         {
-            if (gamepads[i].IsConnected)
-                total++;
+			if ( gamepads [i].IsConnected )
+			{
+				Debug.Log("Gamepad " + i + " is connected");
+				total++;
+			}
         }
-
+		
         return total;
     }
     // Check across all gamepads for button press.

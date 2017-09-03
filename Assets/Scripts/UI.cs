@@ -27,12 +27,18 @@ public class UI : MonoBehaviour {
 
 	public List<playerSort> playerSorts = new List<playerSort>();
 
+	public List<GameObject> panels = new List<GameObject>();
+
+	public GameObject pressAPanels;
+
 	// Use this for initialization
 	void Start () 
 	{
 		playerSorts.Clear();
 
-		foreach(Player _player in players)
+		DisplayPressA();
+
+		foreach (Player _player in players)
 		{
 			playerSort _sort = new playerSort();
 			_sort.player = _player;
@@ -70,6 +76,36 @@ public class UI : MonoBehaviour {
 			playerSorts [i].player.currentPosition = i+1;
 		}
 
+	}
+
+	public void DisplayPressA()
+	{
+		pressAPanels.SetActive(true);
+
+		foreach(GameObject _go in panels)
+		{
+			_go.SetActive(false);
+		}
+
+	}
+
+	public void SetPlayerUI()
+	{
+		pressAs [GameManager.instance.nbrPlayer - 1].text = "PLAYER #" + GameManager.instance.nbrPlayer;
+	}
+
+	public void WaitForCompt()
+	{
+		pressAPanels.SetActive(false);
+		Invoke("DisplayGamePanel", 3);
+	}
+
+	void DisplayGamePanel()
+	{
+		for(int i =0; i<GameManager.instance.nbrPlayer; i++)
+		{
+			panels [i].SetActive(true);
+		}
 	}
 
 }

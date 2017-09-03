@@ -9,7 +9,7 @@ using XInputDotNetPure;
 
 public class Player : MonoBehaviour {
 
-	public x360_Gamepad gamepad;
+	public x360_Gamepad gamepad = null;
 	private GamepadManager manager;
 
 	public Rigidbody rigid;
@@ -290,6 +290,11 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if(gamepad==null)
+		{
+			return;
+		}
+
 		controller.Speed = Mathf.Lerp(controller.Speed, speed, Time.deltaTime);
 
 		if ( gamepad.GetButtonDown("A") )
