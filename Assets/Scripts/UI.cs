@@ -31,6 +31,8 @@ public class UI : MonoBehaviour {
 
 	public GameObject pressAPanels;
 
+	public Text winText;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -112,4 +114,37 @@ public class UI : MonoBehaviour {
 		}
 	}
 
+	public void WinText()
+	{
+
+		for ( int i = 0; i < GameManager.instance.nbrPlayer; i++ )
+		{
+			panels [i].SetActive(false);
+		}
+
+		int _winner = 0;
+		foreach(Player _player in players)
+		{
+			if(_player.currentPosition == 1)
+			{
+				_winner = _player.playerIndex;
+				break;
+			}
+		}
+		winText.text = "Player " + (_winner+1).ToString() + " won";
+
+		winText.gameObject.SetActive(true);
+
+		Invoke("ShowResult", 3);
+	}
+
+	void ShowResult()
+	{
+		winText.gameObject.SetActive(false);
+
+		for ( int i = 0; i < GameManager.instance.nbrPlayer; i++ )
+		{
+			panels [i].SetActive(true);
+		}
+	}
 }

@@ -39,8 +39,7 @@ public class Player : MonoBehaviour {
 	public GameObject visualsPrefab;
 
 	PlayerVisuals visual;
-
-	bool canMove = false;
+	public bool canMove = false;
 
 	bool canSwitch = false;
 
@@ -390,5 +389,9 @@ public class Player : MonoBehaviour {
 	public void AddTurn()
 	{
 		turn++;
+		if(turn >= GameManager.instance.nbrOfLap)
+		{
+			GameManager.instance.EndGame();
+		}
 	}
 }

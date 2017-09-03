@@ -126,4 +126,6 @@ public class GamepadManager : MonoBehaviour {
 
         return false;
     }
+
+	
 }

@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
 	public Timer timer;
 
+	AudioSource _audioSource;
 
 	void Awake( )
 	{
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
 			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
 			Destroy(gameObject);
 		}
+
 	}
 
 	public void AddPlayer(int _playerIndex, int _gpIndex)
@@ -84,6 +86,16 @@ public class GameManager : MonoBehaviour
 				_player.AddSpeedTime(speedByTime);
 			}
 
+		}
+	}
+
+	public void EndGame( )
+	{
+		foreach ( Player _player in players )
+		{
+			_player.naturalSpeed = 0;
+			_player.canMove = false;
+			ui.WinText();
 		}
 	}
 
