@@ -12,6 +12,15 @@ public class MenuManager : MonoBehaviour {
 
     int steps;
 
+    public GameObject hyper1;
+    Vector3 hyperT1;
+
+    public GameObject hyper2;
+    Vector3 hyperT2;
+
+    public GameObject hyper3;
+    Vector3 hyperT3;
+
     public GameObject titre;
     public GameObject tuto;
     public GameObject bonus;
@@ -25,6 +34,10 @@ public class MenuManager : MonoBehaviour {
 
     void Start()
     {
+        hyperT1 = hyper1.transform.localPosition;
+        hyperT2 = hyper2.transform.localPosition;
+        hyperT3 = hyper3.transform.localPosition;
+
         manager = GamepadManager.Instance;
         bonus.SetActive(false);
         malus.SetActive(false);
@@ -33,6 +46,10 @@ public class MenuManager : MonoBehaviour {
     }
 
     void Update() {
+
+        hyper1.transform.localPosition = new Vector3(hyperT1.x + Random.Range(-3, 3), hyperT1.y + Random.Range(-3, 3));
+        hyper2.transform.localPosition = new Vector3(hyperT2.x + Random.Range(-2, 2), hyperT2.y + Random.Range(-2, 2));
+        hyper3.transform.localPosition = new Vector3(hyperT3.x + Random.Range(-1, 1), hyperT3.y + Random.Range(-1, 1));
 
         if (manager.GetButtonDownAny("Start") && steps == 0)
         {
