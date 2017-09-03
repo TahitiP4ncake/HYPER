@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour {
         timerText.text = "";
         startSize = timerText.transform.localScale;
 
-        StartGame();
+        //StartGame();
 
     }
 	
@@ -76,8 +76,10 @@ public class Timer : MonoBehaviour {
         son.PlayOneShot(wait);
         son.PlayOneShot(go);
 
-        yield return new WaitForSeconds(1);
+		gameOn = true;
+
+		yield return new WaitForSeconds(1);
         timerText.text = "";
-        gameOn = true;
+
     }
 }
