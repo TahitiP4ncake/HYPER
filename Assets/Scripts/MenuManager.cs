@@ -18,6 +18,11 @@ public class MenuManager : MonoBehaviour {
     public GameObject malus;
     public Text nextScene;
 
+    public AudioSource son;
+
+    public AudioClip validation;
+    public AudioClip start;
+
     void Start()
     {
         manager = GamepadManager.Instance;
@@ -32,6 +37,7 @@ public class MenuManager : MonoBehaviour {
         if (manager.GetButtonDownAny("Start") && steps == 0)
         {
             Tuto();
+            son.PlayOneShot(validation,1);
             print("tuto");
             steps = 1;
             Invoke("BeforeStart", 2);  
@@ -63,6 +69,8 @@ public class MenuManager : MonoBehaviour {
 
     void StartGame()
     {
+        son.pitch = 1.1f;
+        son.PlayOneShot(start,1);
         print("LOAD SCENE");
         //SceneManager.LoadScene(1);
     }
