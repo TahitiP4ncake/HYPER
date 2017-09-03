@@ -55,7 +55,7 @@ public class MenuManager : MonoBehaviour {
         {
             Tuto();
             son.PlayOneShot(validation,1);
-            print("tuto");
+            //print("tuto");
             steps = 1;
             Invoke("BeforeStart", 2);  
         }
@@ -63,7 +63,7 @@ public class MenuManager : MonoBehaviour {
         if (manager.GetButtonDownAny("A") && steps == 2)
         {
             steps = 3;
-            print("start");
+            //print("start");
             StartGame();
         }
 
@@ -71,7 +71,7 @@ public class MenuManager : MonoBehaviour {
 
     void BeforeStart()
         {
-        print("ready");
+        //print("ready");
         nextScene.gameObject.SetActive(true);
         steps = 2;
     }
@@ -88,7 +88,7 @@ public class MenuManager : MonoBehaviour {
     {
         son.pitch = 1.1f;
         son.PlayOneShot(start,1);
-        print("LOAD SCENE");
+        SceneManager.LoadScene(1);
         //SceneManager.LoadScene(1);
     }
 }

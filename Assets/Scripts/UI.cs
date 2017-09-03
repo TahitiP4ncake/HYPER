@@ -33,8 +33,11 @@ public class UI : MonoBehaviour {
 
 	public Text winText;
 
-	// Use this for initialization
-	void Start () 
+    public PlayerVisuals visuals;
+
+
+    // Use this for initialization
+    void Start () 
 	{
 		playerSorts.Clear();
 
@@ -131,8 +134,28 @@ public class UI : MonoBehaviour {
 				break;
 			}
 		}
-		winText.text = "Player " + (_winner+1).ToString() + " won";
 
+		winText.text = "Player " + (_winner+1).ToString() + " won";
+        switch(_winner)
+        {
+            case 0:
+                winText.color = visuals.color1;
+                winText.GetComponent<Shadow>().effectColor = new Color(visuals.color1.r, visuals.color1.g, visuals.color1.b, 7.5f);
+                break;
+            case 1:
+                winText.color = visuals.color2;
+                winText.GetComponent<Shadow>().effectColor = new Color(visuals.color2.r, visuals.color2.g, visuals.color2.b, 7.5f);
+                break;
+            case 2:
+                winText.color = visuals.color3;
+                winText.GetComponent<Shadow>().effectColor = new Color(visuals.color3.r, visuals.color3.g, visuals.color3.b, 7.5f);
+                break;
+            case 3:
+                winText.color = visuals.color4;
+                winText.GetComponent<Shadow>().effectColor = new Color(visuals.color4.r, visuals.color4.g, visuals.color4.b, 7.5f);
+                break;
+        }
+        //winText.color = _color;
 		winText.gameObject.SetActive(true);
 
 		Invoke("ShowResult", 3);
