@@ -34,11 +34,15 @@ public class Player : MonoBehaviour {
 
 	private float calculSpeed;
 
-	#endregion
+    #endregion
+
+    public GameObject bonusFx;
+    public GameObject malusFx;
+    public GameObject impactFx;
 
 	public GameObject visualsPrefab;
 
-	PlayerVisuals visual;
+	public PlayerVisuals visual;
 	public bool canMove = false;
 
 	bool canSwitch = false;
@@ -57,12 +61,23 @@ public class Player : MonoBehaviour {
 
 	public int currentPosition;
 
-	void Start()
+    #region AudioSources
+
+    AudioSource a_bonus;
+    AudioSource a_malus;
+    AudioSource a_impact;
+    AudioSource a_spawn;
+
+    #endregion
+
+    void Start()
 	{
 		manager = GamepadManager.Instance;
 
-		
-
+        a_bonus = Harmony.SetSource("boost");
+        a_malus = Harmony.SetSource("malus");
+        a_impact = Harmony.SetSource("Player_Bump");
+        
 	}
 
 
@@ -75,11 +90,14 @@ public class Player : MonoBehaviour {
 
 		gamepad.AddRumble(1, Vector2.one, 0.5f);
 
-		GameObject _go = Instantiate(visualsPrefab);
+		GameObject _go = Instantiate(visualsPrefab, transform.position,transform.rotation);
 
 		visual = _go.GetComponent<PlayerVisuals>();
 
 		visual.SetPlayer(gameObject, playerIndex);
+
+        a_spawn = Harmony.SetSource("speed");
+        Harmony.Play(a_spawn);
 	}
 
 	public void StartRace()
@@ -194,7 +212,9 @@ public class Player : MonoBehaviour {
 			{
 				if ( controller.RelativePosition > _player.controller.RelativePosition )
 				{
-					Pushed();
+                    GameObject _impactFx = Instantiate(impactFx, transform.position, impactFx.transform.rotation);
+                    Destroy(_impactFx, 1);
+                    Pushed();
 				}
 				else
 				{
@@ -206,11 +226,17 @@ public class Player : MonoBehaviour {
 		{
 			isOnBonus = true;
 			bonus = other.gameObject.GetComponent<Bonus>();
-
+            
 		}
 		else if (other.gameObject.tag == "Malus" && canMove)
+
 		{
-			StopAllCoroutines();
+            Harmony.Play(a_malus);
+
+            GameObject _malus = Instantiate(malusFx, transform.position, malusFx.transform.rotation);
+            Destroy(_malus, 1);
+
+            StopAllCoroutines();
 			StartCoroutine(Malus());
 			bonus = other.gameObject.GetComponent<Bonus>();
 		}
@@ -245,7 +271,8 @@ public class Player : MonoBehaviour {
 			{
 				return;
 			}
-			visual.PlayAnimation(AnimationState.Left);
+
+            visual.PlayAnimation(AnimationState.Left);
 		}
 		else
 		{
@@ -253,20 +280,26 @@ public class Player : MonoBehaviour {
 			{
 				return;
 			}
-			visual.PlayAnimation(AnimationState.Right);
+            
+            visual.PlayAnimation(AnimationState.Right);
 		}
+        Harmony.Play(a_impact);
 
-		ChangeSpline(_inner);
+        GameObject _impactFx = Instantiate(impactFx, transform.position, impactFx.transform.rotation);
+        Destroy(_impactFx, 1);
 
-
-		
+        ChangeSpline(_inner);
 
 	}
 
 	public void SetBack()
 	{
+        Harmony.Play(a_impact);
 
-		ChangeSpline(!goInner);
+        GameObject _impactFx = Instantiate(impactFx, transform.position, impactFx.transform.rotation);
+        Destroy(_impactFx, 1);
+
+        ChangeSpline(!goInner);
 
 	}
 
@@ -281,7 +314,9 @@ public class Player : MonoBehaviour {
 
 	void Pushed()
 	{
-		Debug.Log(gameObject.name + " is pushed");
+        Harmony.Play(a_impact);
+
+        Debug.Log(gameObject.name + " is pushed");
 
 		visual.PlayAnimation(AnimationState.Front);
 
@@ -304,7 +339,11 @@ public class Player : MonoBehaviour {
 		{
 			if(isOnBonus && canMove)
 			{
-				isOnBonus = false;
+                Harmony.Play(a_bonus);
+
+                visual.PlayAnimation(AnimationState.Front);
+                Instantiate(bonusFx,transform.position, bonusFx.transform.rotation);
+                isOnBonus = false;
 				StopAllCoroutines();
 				StartCoroutine(Bonus());
 				bonus.Randomize();
@@ -358,7 +397,8 @@ public class Player : MonoBehaviour {
 
 	IEnumerator Bonus()
 	{
-		bonusSpeed = 2f;
+        visual.JetOn();
+        bonusSpeed = 2f;
 		SpeedCalcul();
 
 
@@ -367,12 +407,14 @@ public class Player : MonoBehaviour {
 		yield return new WaitForSeconds(2);
 
 		bonusSpeed = 1f;
-		SpeedCalcul();
+        visual.JetOff();
+        SpeedCalcul();
 	}
 
 	IEnumerator Malus()
 	{
-		gamepad.AddRumble(1, Vector2.one, 1);
+        visual.JetOff();
+        gamepad.AddRumble(1, Vector2.one, 1);
 
 		bonus.Randomize();
 

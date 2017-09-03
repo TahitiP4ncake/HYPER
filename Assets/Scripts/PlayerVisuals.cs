@@ -39,7 +39,19 @@ public class PlayerVisuals : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        JetOff();
        // SetColor(4);
+    }
+
+    public void JetOn()
+    {
+        
+            jet.Play();
+        
+    }
+    public void JetOff()
+    {
+        jet.Stop();
     }
 
     public void SetPlayer(GameObject _playerController, int _playerIndex)

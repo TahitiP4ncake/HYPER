@@ -1,11 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+using XInputDotNetPure;
 
 using FluffyUnderware.Curvy;
 
 public class GameManager : MonoBehaviour
 {
+    public RawImage flash;
+    bool flashed;
+    
 	public int nbrPlayer = 0;
 
 	public List<Player> players = new List<Player>();
@@ -23,10 +30,17 @@ public class GameManager : MonoBehaviour
 
 	public Timer timer;
 
-	AudioSource _audioSource;
+    AudioSource a_win;
+    AudioSource a_theme;
+
+    bool gameOver;
+
+    GamepadManager manager;
+
 
 	void Awake( )
 	{
+
 		//Check if instance already exists
 		if ( instance == null )
 
@@ -41,6 +55,10 @@ public class GameManager : MonoBehaviour
 			Destroy(gameObject);
 		}
 
+        a_win = Harmony.SetSource("Win");
+        a_theme = Harmony.SetSource("theme1");
+        a_theme.loop = true;
+        Harmony.Play(a_theme);
 	}
 
 	public void AddPlayer(int _playerIndex, int _gpIndex)
@@ -73,9 +91,22 @@ public class GameManager : MonoBehaviour
 
 		StartCoroutine(SpeedTime());
 	}
-	
 
-	IEnumerator SpeedTime()
+    private void Update()
+    {
+        if(gameOver)
+        {
+            if (manager.GetButtonDownAny("Start"))
+            {
+                Scene _scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(_scene.buildIndex);
+               
+            }
+            
+        }
+    }
+
+    IEnumerator SpeedTime()
 	{
 		while(true)
 		{
@@ -91,12 +122,38 @@ public class GameManager : MonoBehaviour
 
 	public void EndGame( )
 	{
+        manager = GamepadManager.Instance;
+        
+
+        if(!flashed)
+        StartCoroutine(FlashTimer());
+        gameOver = true;
+
+
 		foreach ( Player _player in players )
 		{
 			_player.naturalSpeed = 0;
 			_player.canMove = false;
-			ui.WinText();
+            //ui.WinText(_player.visual.gameObject.GetComponentInChildren<Renderer>().material.GetColor("_Player_Color"));
+            ui.WinText();
 		}
 	}
+    IEnumerator FlashTimer()
+    {
+        Harmony.Play(a_win);
+
+        flashed = true;
+        flash.color = new Color(1, 1, 1, 1);
+
+        float _a = 1;
+        while(flash.color.a>0)
+        {
+            flash.color = new Color(1, 1, 1, _a);
+            _a -= Time.deltaTime;
+            yield return null;
+        }
+    }
+
+  
 
 }

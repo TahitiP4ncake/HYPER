@@ -199,5 +199,13 @@ MonoBehaviour:
   controller: {fileID: 114151843910096510}
   playerIndex: 1
   speed: 0
+  naturalSpeed: 5
+  bonusFx: {fileID: 1747999368547256, guid: 5d27419898d524e42852c6609d253791, type: 2}
+  malusFx: {fileID: 1150816485631112, guid: 2616d8192e687074b8eb41b100f73c6f, type: 2}
+  impactFx: {fileID: 1651855570234924, guid: fb972c71c7ec90646ad970a954e11b93, type: 2}
   visualsPrefab: {fileID: 1582375215814350, guid: 358a1ad1ead91354999adaeb0d227b69,
     type: 2}
+  canMove: 0
+  canInterract: 1
+  turn: 0
+  currentPosition: 0
