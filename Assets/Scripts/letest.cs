@@ -14,8 +14,17 @@ public class letest : MonoBehaviour {
         manager = GamepadManager.Instance;
         //  gamepad = manager.GetGamepad();
         gamepad=manager.GetGamepad(1);
+
+        StartCoroutine(Gamepadator());
+        
     }
 
+
+    IEnumerator Gamepadator()
+    {
+        yield return new WaitForSeconds(.5f);
+        print(manager.ConnectedTotal());
+    }
     // Update is called once per frame
     void Update()
     {
@@ -23,6 +32,7 @@ public class letest : MonoBehaviour {
         {
             Debug.Log("oui");
         }
+        
     }
    
     }
