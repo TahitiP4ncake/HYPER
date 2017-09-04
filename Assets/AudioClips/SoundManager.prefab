@@ -63,7 +63,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430305532e7260d4099c823e4dd0cb32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ListClips: []
+  ListClips:
+  - {fileID: 8300000, guid: 95b1f7af869b2bf4da0ffd53b39bd2ff, type: 3}
+  - {fileID: 8300000, guid: a1f2d4489e4ae954182248c577a85fb3, type: 3}
+  - {fileID: 8300000, guid: 96dc91dd04d490e4ba651dba89c28c17, type: 3}
+  - {fileID: 8300000, guid: 980c213e8477cb44bb24a0b08be1406f, type: 3}
+  - {fileID: 8300000, guid: dd1a53a1a82bbc4408c60830eb6c3cca, type: 3}
+  - {fileID: 8300000, guid: 5ed11916682467e47a31e0cf902e4ab9, type: 3}
+  - {fileID: 8300000, guid: 082400dccfb80d44aa0f79763387ac19, type: 3}
+  - {fileID: 8300000, guid: 4a52a50e95b2e944f8ca31f99b360a95, type: 3}
+  - {fileID: 8300000, guid: 6df2ea408eb5ebe47ac63ae2082ac047, type: 3}
   Source: []
   AudioMixers: []
   CurrentAudioMixer: {fileID: 0}
