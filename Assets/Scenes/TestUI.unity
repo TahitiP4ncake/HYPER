@@ -3014,6 +3014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a07d933c9fc7c4daaff356ca6f9e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nbrPlayer: 0
   players:
   - {fileID: 6802842}
   - {fileID: 202026161}
@@ -3025,6 +3026,8 @@ MonoBehaviour:
   - {fileID: 666061642}
   - {fileID: 1573520624}
   nbrOfLap: 20
+  ui: {fileID: 0}
+  timer: {fileID: 0}
 --- !u!4 &1412360730
 Transform:
   m_ObjectHideFlags: 0
