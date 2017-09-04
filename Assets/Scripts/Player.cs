@@ -306,7 +306,6 @@ public class Player : MonoBehaviour {
 	// par devant par derriere
 	void Pushing()
 	{
-		Debug.Log(gameObject.name + " push");
 
 		visual.PlayAnimation(AnimationState.Back);
 		gamepad.AddRumble(1, Vector2.one, 1);
@@ -315,9 +314,6 @@ public class Player : MonoBehaviour {
 	void Pushed()
 	{
         Harmony.Play(a_impact);
-
-        Debug.Log(gameObject.name + " is pushed");
-
 		visual.PlayAnimation(AnimationState.Front);
 
 		StopAllCoroutines();
@@ -333,7 +329,7 @@ public class Player : MonoBehaviour {
 			return;
 		}
 
-		controller.Speed = Mathf.Lerp(controller.Speed, speed, Time.deltaTime);
+		controller.Speed = speed;
 
 		if ( gamepad.GetButtonDown("A") )
 		{
@@ -398,8 +394,19 @@ public class Player : MonoBehaviour {
 	IEnumerator Bonus()
 	{
         visual.JetOn();
-        bonusSpeed = 2f;
+        
+		bonusSpeed = 2f;
+
+		if(currentPosition-1!=0)
+		{
+			bonusSpeed += ( (float) currentPosition - 1 )/2;
+		}
+		
+		bonusSpeed += ((float)currentPosition -1);
+
 		SpeedCalcul();
+
+		
 
 
 		visual.PlayAnimation(AnimationState.Bonus);
@@ -418,7 +425,7 @@ public class Player : MonoBehaviour {
 
 		bonus.Randomize();
 
-		bonusSpeed = 0.5f;
+		bonusSpeed = 0.5f - ((float)currentPosition/10);
 		SpeedCalcul();
 
 		visual.PlayAnimation(AnimationState.Malus);

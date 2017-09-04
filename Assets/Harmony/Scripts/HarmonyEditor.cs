@@ -17,7 +17,12 @@
 */
 
 using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
+
+
+
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine.Audio;
@@ -1448,3 +1453,4 @@ public class HarmonyEditor : EditorWindow
 
 }
 
+#endif
