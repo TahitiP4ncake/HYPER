@@ -74,6 +74,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 082400dccfb80d44aa0f79763387ac19, type: 3}
   - {fileID: 8300000, guid: 4a52a50e95b2e944f8ca31f99b360a95, type: 3}
   - {fileID: 8300000, guid: 6df2ea408eb5ebe47ac63ae2082ac047, type: 3}
+  - {fileID: 8300000, guid: 868acdbdc98173c4490052b6e0c3f589, type: 3}
   Source: []
   AudioMixers: []
   CurrentAudioMixer: {fileID: 0}
