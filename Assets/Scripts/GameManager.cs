@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     AudioSource a_win;
     AudioSource a_theme;
 
+    public Text restartText;
+
     bool gameOver;
 
     GamepadManager manager;
@@ -148,6 +150,7 @@ public class GameManager : MonoBehaviour
 	}
     IEnumerator FlashTimer()
     {
+        StartCoroutine(AskRestart());
         Harmony.Play(a_win);
 
         flashed = true;
@@ -160,6 +163,12 @@ public class GameManager : MonoBehaviour
             _a -= Time.deltaTime;
             yield return null;
         }
+    }
+
+    IEnumerator AskRestart()
+    {
+        yield return new WaitForSeconds(4f);
+        restartText.gameObject.SetActive(true);
     }
 
   
