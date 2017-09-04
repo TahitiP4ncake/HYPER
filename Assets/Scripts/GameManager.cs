@@ -84,20 +84,20 @@ public class GameManager : MonoBehaviour
 	public void StartRace()
 	{
 		timer.StartGame();
-		Invoke("TrueRaceBegin",3.5f);
+		Invoke("TrueRaceBegin",3.2f);
 		ui.WaitForCompt();
 	}
 
 	void TrueRaceBegin()
 	{
-		
+		StartCoroutine(SpeedTime());
 
 		foreach ( Player _player in players )
 		{
 			_player.StartRace();
 		}
 
-		StartCoroutine(SpeedTime());
+
 	}
 
     private void Update()
@@ -116,7 +116,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpeedTime()
 	{
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.5f);
+
+		foreach ( Player _player in players )
+		{
+			_player.AddSpeedTime(speedByTime);
+		}
 
 		while (true)
 		{

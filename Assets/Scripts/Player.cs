@@ -233,14 +233,16 @@ public class Player : MonoBehaviour {
 		}
 		else if (other.gameObject.tag == "Malus" && canMove)
 		{
-            Harmony.Play(a_malus);
+			bonus = other.gameObject.GetComponent<Bonus>();
+
+			Harmony.Play(a_malus);
 
             GameObject _malus = Instantiate(malusFx, transform.position, malusFx.transform.rotation);
             Destroy(_malus, 1);
 
             StopAllCoroutines();
 			StartCoroutine(Malus());
-			bonus = other.gameObject.GetComponent<Bonus>();
+
 		}
 		else if( other.gameObject.tag == "ChangeDirection" )
 		{
@@ -503,6 +505,11 @@ public class Player : MonoBehaviour {
 	{
         visual.JetOff();
         gamepad.AddRumble(1, Vector2.one, 1);
+
+		if(bonus==null)
+		{
+			
+		}
 
 		bonus.Randomize();
 
