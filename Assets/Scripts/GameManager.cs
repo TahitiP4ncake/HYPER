@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
 	public void StartRace()
 	{
 		timer.StartGame();
-		Invoke("TrueRaceBegin",3);
+		Invoke("TrueRaceBegin",3.5f);
 		ui.WaitForCompt();
 	}
 
@@ -114,7 +114,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpeedTime()
 	{
-		while(true)
+		yield return new WaitForSeconds(1);
+
+		while (true)
 		{
 			yield return new WaitForSeconds(1);
 
