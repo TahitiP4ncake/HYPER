@@ -23,7 +23,7 @@ public class Timer : MonoBehaviour {
 	void Start () {
         timerText.text = "";
         startSize = timerText.transform.localScale;
-
+        
         //StartGame();
 
     }
@@ -78,8 +78,12 @@ public class Timer : MonoBehaviour {
 
 		gameOn = true;
 
+        AudioSource a_start = Harmony.SetSource("speed");
+        Harmony.Play(a_start);
+
 		yield return new WaitForSeconds(1);
         timerText.text = "";
+
 
     }
 }

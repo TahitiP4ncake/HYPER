@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
+using UnityEngine.UI;
 
 public class CreatePlayer : MonoBehaviour {
 
@@ -17,6 +18,8 @@ public class CreatePlayer : MonoBehaviour {
     bool p3;
     bool p4;
 
+    public Text pressStart;
+
 	bool isLaunched = false;
 
     public int playerActive;
@@ -27,7 +30,8 @@ public class CreatePlayer : MonoBehaviour {
 	void Start( ) 
 	{
 		Invoke("CheckControllers", 0.1f);
-	}
+        pressStart.gameObject.SetActive(false);
+    }
 
 	void CheckControllers()
 	{ 
@@ -84,6 +88,7 @@ public class CreatePlayer : MonoBehaviour {
 		
 		if ( playerActive > 1 )
 		{
+            pressStart.gameObject.SetActive(true);
 			if ( manager.GetButtonDownAny("Start") )
 			{
 				
@@ -94,6 +99,7 @@ public class CreatePlayer : MonoBehaviour {
 
 	void LaunchRace()
 	{
+        pressStart.gameObject.SetActive(false);
 		isLaunched = true;
 		GameManager.instance.StartRace();
 	}
