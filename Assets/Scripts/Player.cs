@@ -61,6 +61,9 @@ public class Player : MonoBehaviour {
 
 	public int currentPosition;
 
+	public Controls goInnerDirection = Controls.Up;
+	public Controls goOutterDirection = Controls.Down;
+
     #region AudioSources
 
     AudioSource a_bonus;
@@ -229,7 +232,6 @@ public class Player : MonoBehaviour {
             
 		}
 		else if (other.gameObject.tag == "Malus" && canMove)
-
 		{
             Harmony.Play(a_malus);
 
@@ -239,6 +241,11 @@ public class Player : MonoBehaviour {
             StopAllCoroutines();
 			StartCoroutine(Malus());
 			bonus = other.gameObject.GetComponent<Bonus>();
+		}
+		else if( other.gameObject.tag == "ChangeDirection" )
+		{
+			goInnerDirection = other.gameObject.GetComponent<ChangeDirection>().goInner;
+			goOutterDirection = other.gameObject.GetComponent<ChangeDirection>().goOuter;
 		}
 	}
 
@@ -350,29 +357,103 @@ public class Player : MonoBehaviour {
 		{
 			if ( canMove )
 			{
-				if ( gamepad.GetStick_L().X >= 0.9f )
-				{
-					goInner = false;
-					ChangeSpline(false);
-					canSwitch = false;
-					
+
+				switch ( goInnerDirection )
+				{	
+					case Controls.Left:
+						if ( gamepad.GetStick_L().X <= -0.5f )
+						{
+							goInner = true;
+							ChangeSpline(goInner);
+							canSwitch = false;
+						}
+						break;
+					case Controls.Right:
+						if ( gamepad.GetStick_L().X >= 0.5f )
+						{
+							goInner = true;
+							ChangeSpline(goInner);
+							canSwitch = false;
+						}
+						break;
+					case Controls.Up:
+						if ( gamepad.GetStick_L().Y >= 0.5f )
+						{
+							goInner = true;
+							ChangeSpline(goInner);
+							canSwitch = false;
+						}
+						break;
+					case Controls.Down:
+						if ( gamepad.GetStick_L().Y <= -0.5f )
+						{
+							goInner = true;
+							ChangeSpline(goInner);
+							canSwitch = false;
+						}
+						break;
 				}
 
-				if ( gamepad.GetStick_L().X <= -0.9f )
+				switch ( goOutterDirection )
 				{
-					goInner = true;
-					ChangeSpline(true);
-					canSwitch = false;
-					
+					case Controls.Left:
+						if ( gamepad.GetStick_L().X <= -0.5f )
+						{
+							goInner = false;
+							ChangeSpline(goInner);
+							canSwitch = false;
+						}
+						break;
+					case Controls.Right:
+						if ( gamepad.GetStick_L().X >= 0.5f )
+						{
+							goInner = false;
+							ChangeSpline(goInner);
+							canSwitch = false;
+
+						}
+						break;
+					case Controls.Up:
+						if ( gamepad.GetStick_L().Y >= 0.5f )
+						{
+							goInner = false;
+							ChangeSpline(goInner);
+							canSwitch = false;
+						}
+							break;
+					case Controls.Down:
+						if ( gamepad.GetStick_L().Y <= -0.5f )
+						{
+							goInner = false;
+							ChangeSpline(goInner);
+							canSwitch = false;
+						}
+						break;
 				}
+
+			
+
+				
 			}
 		}
 		else
 		{
-			if ( gamepad.GetStick_L().X <= 0.1f && gamepad.GetStick_L().X >= -0.1f )
+			if(goInnerDirection== Controls.Left || goInnerDirection == Controls.Right)
 			{
-				canSwitch = true;
+				if ( gamepad.GetStick_L().X < 0.5f && gamepad.GetStick_L().X > -0.5f )
+				{
+					canSwitch = true;
+				}
 			}
+
+			if ( goInnerDirection == Controls.Up || goInnerDirection == Controls.Down )
+			{
+				if (gamepad.GetStick_L().Y <= 0.5f && gamepad.GetStick_L().Y >= -0.5f )
+				{
+					canSwitch = true;
+				}
+			}
+
 		}
 	}
 

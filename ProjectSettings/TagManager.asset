@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bonus
   - Malus
+  - ChangeDirection
   layers:
   - Default
   - TransparentFX
