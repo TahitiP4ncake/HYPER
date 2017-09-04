@@ -73,7 +73,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     - _inner: 0.2
-    - _lerp: 1.0271347
+    - _lerp: 1.0271318
     - _power: 1.74
     m_Colors:
     - _Color: {r: 0.39844593, g: 0.9558824, b: 0.077314034, a: 1}
