@@ -35,10 +35,31 @@ public class UI : MonoBehaviour {
 
     public PlayerVisuals visuals;
 
+	public GameObject lapPanel;
+
+	public Text lapCompteur;
+
+	public Animator arrowRight;
+
+	public Animator arrowLeft;
+
+
+
+	bool canChangeLap = true;
 
     // Use this for initialization
     void Start () 
 	{
+
+		if ( GameManager.instance.nbrOfLap < 10 )
+		{
+			lapCompteur.text = "0"+GameManager.instance.nbrOfLap.ToString();
+		}
+		else
+		{
+			lapCompteur.text = GameManager.instance.nbrOfLap.ToString();
+		}
+
 		playerSorts.Clear();
 
 		DisplayPressA();
@@ -52,6 +73,8 @@ public class UI : MonoBehaviour {
 			playerSorts.Add(_sort);
 		}
 
+		canChangeLap = true;
+
 	}
 	
 
@@ -59,13 +82,27 @@ public class UI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-	DefineRanking();
+		DefineRanking();
 
 		for(int i = 0; i < players.Count; i++)
 		{
 			laps[i].text = players[i].turn.ToString() + " / " + GameManager.instance.nbrOfLap.ToString();
 
 			scores [i].text = "#" + players [i].currentPosition.ToString();
+		}
+
+		if(canChangeLap)
+		{
+			if(GamepadManager.Instance.GetButtonDownAny("B"))
+			{
+				AddTurn(true);
+			}
+			else if(GamepadManager.Instance.GetButtonDownAny("X"))
+			{
+				AddTurn(false);
+			}
+
+
 		}
 
 		
@@ -105,12 +142,15 @@ public class UI : MonoBehaviour {
 
 	public void WaitForCompt()
 	{
+		lapPanel.SetActive(false);
+		canChangeLap = false;
 		pressAPanels.SetActive(false);
 		Invoke("DisplayGamePanel", 4);
 	}
 
 	void DisplayGamePanel()
 	{
+
 		for(int i =0; i<GameManager.instance.nbrPlayer; i++)
 		{
 			panels [i].SetActive(true);
@@ -170,4 +210,45 @@ public class UI : MonoBehaviour {
 			panels [i].SetActive(true);
 		}
 	}
+
+	void AddTurn(bool _add)
+	{
+		if (_add)
+		{
+			GameManager.instance.nbrOfLap++;
+
+			arrowRight.SetTrigger("Move");
+
+			if (GameManager.instance.nbrOfLap>99)
+			{
+				GameManager.instance.nbrOfLap = 1;
+			}
+
+			
+
+		}
+		else
+		{
+			GameManager.instance.nbrOfLap--;
+
+			arrowLeft.SetTrigger("Move");
+
+			if ( GameManager.instance.nbrOfLap < 1 )
+			{
+				GameManager.instance.nbrOfLap = 99;
+			}
+		}
+
+		if ( GameManager.instance.nbrOfLap < 10 )
+		{
+			lapCompteur.text = "0" + GameManager.instance.nbrOfLap.ToString();
+		}
+		else
+		{
+			lapCompteur.text = GameManager.instance.nbrOfLap.ToString();
+		}
+
+	}
+
+
 }

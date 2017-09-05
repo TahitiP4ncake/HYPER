@@ -539,10 +539,13 @@ public class Player : MonoBehaviour {
         Harmony.Play(a_turn);
 
 		turn++;
-		if(turn >= GameManager.instance.nbrOfLap)
+
+
+		if (turn >= GameManager.instance.nbrOfLap)
 		{
 			GameManager.instance.EndGame();
 		}
+
 	}
 
     IEnumerator SmallBurst()
@@ -553,4 +556,5 @@ public class Player : MonoBehaviour {
         visual.JetOff();
         jetOn = false;
     }
+
 }
