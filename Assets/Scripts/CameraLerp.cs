@@ -8,6 +8,7 @@ public class CameraLerp : MonoBehaviour {
     public AnimationCurve vertical;
     public AnimationCurve forward;
 
+    public float speed=1;
     Vector3 origin;
 
 	// Use this for initialization
@@ -19,9 +20,14 @@ public class CameraLerp : MonoBehaviour {
 	void Update ()
     {
         transform.eulerAngles = new Vector3(
-            origin.x + horizontal.Evaluate(Time.time),
-            origin.y + vertical.Evaluate(Time.time),
-            origin.z + forward.Evaluate(Time.time));
-
+            origin.x + horizontal.Evaluate(Time.time*speed),
+            origin.y + vertical.Evaluate(Time.time*speed),
+            origin.z + forward.Evaluate(Time.time*speed));
+        /*
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            speed += 0.1f;
+        }
+        */
     }
 }

@@ -356,6 +356,11 @@ public class Player : MonoBehaviour {
 				StartCoroutine(Bonus());
 				bonus.Randomize();
 			}
+
+            if(!jetOn)
+            {
+                StartCoroutine(SmallBurst());
+            }
 		}
         
 
@@ -539,4 +544,13 @@ public class Player : MonoBehaviour {
 			GameManager.instance.EndGame();
 		}
 	}
+
+    IEnumerator SmallBurst()
+    {
+        jetOn = true;
+        visual.JetOn();
+        yield return new WaitForSeconds(.3f);
+        visual.JetOff();
+        jetOn = false;
+    }
 }
