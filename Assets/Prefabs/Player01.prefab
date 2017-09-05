@@ -27,11 +27,11 @@ GameObject:
   - component: {fileID: 54754276053760568}
   m_Layer: 0
   m_Name: Player01
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4596687504506548
 Transform:
   m_ObjectHideFlags: 1
@@ -39,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1279355202006978}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -19.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: -19.7}
+  m_LocalScale: {x: 4.7624226, y: 4.762422, z: 4.762422}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1279355202006978}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -126,16 +126,19 @@ MonoBehaviour:
   controller: {fileID: 114867331978242546}
   playerIndex: 0
   speed: 0
-  naturalSpeed: 5
+  naturalSpeed: 30
   bonusFx: {fileID: 1747999368547256, guid: 5d27419898d524e42852c6609d253791, type: 2}
   malusFx: {fileID: 1150816485631112, guid: 2616d8192e687074b8eb41b100f73c6f, type: 2}
   impactFx: {fileID: 1651855570234924, guid: fb972c71c7ec90646ad970a954e11b93, type: 2}
   visualsPrefab: {fileID: 1582375215814350, guid: 358a1ad1ead91354999adaeb0d227b69,
     type: 2}
+  visual: {fileID: 0}
   canMove: 0
   canInterract: 1
   turn: 0
   currentPosition: 0
+  goInnerDirection: 2
+  goOutterDirection: 3
 --- !u!114 &114867331978242546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,7 +204,18 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   m_OnEndReached:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114545527175516944}
+        m_MethodName: AddTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: FluffyUnderware.Curvy.CurvySplineMoveEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_OnSwitch:
