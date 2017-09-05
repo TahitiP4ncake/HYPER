@@ -35,6 +35,13 @@ public class UI : MonoBehaviour {
 
     public PlayerVisuals visuals;
 
+	public Text lapCompteur;
+
+	public Animator arrowRight;
+
+	public Animator arrowLeft;
+
+	bool canChangeLap = true;
 
     // Use this for initialization
     void Start () 
@@ -52,6 +59,8 @@ public class UI : MonoBehaviour {
 			playerSorts.Add(_sort);
 		}
 
+		canChangeLap = true;
+
 	}
 	
 
@@ -59,13 +68,27 @@ public class UI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-	DefineRanking();
+		DefineRanking();
 
 		for(int i = 0; i < players.Count; i++)
 		{
 			laps[i].text = players[i].turn.ToString() + " / " + GameManager.instance.nbrOfLap.ToString();
 
 			scores [i].text = "#" + players [i].currentPosition.ToString();
+		}
+
+		if(canChangeLap)
+		{
+			if(GamepadManager.Instance.GetButtonDownAny("X"))
+			{
+				AddTurn(true);
+			}
+			else if(GamepadManager.Instance.GetButtonDownAny("B"))
+			{
+				AddTurn(false);
+			}
+
+
 		}
 
 		
@@ -105,12 +128,14 @@ public class UI : MonoBehaviour {
 
 	public void WaitForCompt()
 	{
+		canChangeLap = false;
 		pressAPanels.SetActive(false);
 		Invoke("DisplayGamePanel", 4);
 	}
 
 	void DisplayGamePanel()
 	{
+
 		for(int i =0; i<GameManager.instance.nbrPlayer; i++)
 		{
 			panels [i].SetActive(true);
@@ -170,4 +195,35 @@ public class UI : MonoBehaviour {
 			panels [i].SetActive(true);
 		}
 	}
+
+	void AddTurn(bool _add)
+	{
+		arrowLeft.SetTrigger("Move");
+		arrowRight.SetTrigger("Move");
+
+		if (_add)
+		{
+			GameManager.instance.nbrOfLap++;
+
+			if(GameManager.instance.nbrOfLap>99)
+			{
+				GameManager.instance.nbrOfLap = 1;
+			}
+
+		}
+		else
+		{
+			GameManager.instance.nbrOfLap--;
+
+			if ( GameManager.instance.nbrOfLap < 1 )
+			{
+				GameManager.instance.nbrOfLap = 99;
+			}
+		}
+
+
+
+	}
+
+
 }
