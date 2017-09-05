@@ -64,12 +64,15 @@ public class Player : MonoBehaviour {
 	public Controls goInnerDirection = Controls.Up;
 	public Controls goOutterDirection = Controls.Down;
 
+    bool jetOn;
+
     #region AudioSources
 
     AudioSource a_bonus;
     AudioSource a_malus;
     AudioSource a_impact;
     AudioSource a_spawn;
+    AudioSource a_turn;
 
     #endregion
 
@@ -80,7 +83,7 @@ public class Player : MonoBehaviour {
         a_bonus = Harmony.SetSource("boost");
         a_malus = Harmony.SetSource("malus");
         a_impact = Harmony.SetSource("Player_Bump");
-        
+        a_turn = Harmony.SetSource("bipTour");
 	}
 
 
@@ -354,6 +357,7 @@ public class Player : MonoBehaviour {
 				bonus.Randomize();
 			}
 		}
+        
 
 		if ( canSwitch )
 		{
@@ -477,6 +481,7 @@ public class Player : MonoBehaviour {
 	IEnumerator Bonus()
 	{
         visual.JetOn();
+        jetOn = true;
         
 		bonusSpeed = 2f;
 
@@ -498,6 +503,7 @@ public class Player : MonoBehaviour {
 
 		bonusSpeed = 1f;
         visual.JetOff();
+        jetOn = false;
         SpeedCalcul();
 	}
 
@@ -525,6 +531,8 @@ public class Player : MonoBehaviour {
 
 	public void AddTurn()
 	{
+        Harmony.Play(a_turn);
+
 		turn++;
 
 
