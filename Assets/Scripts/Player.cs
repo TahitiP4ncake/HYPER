@@ -526,9 +526,14 @@ public class Player : MonoBehaviour {
 	public void AddTurn()
 	{
 		turn++;
-		if(turn >= GameManager.instance.nbrOfLap)
+
+
+		if (turn >= GameManager.instance.nbrOfLap)
 		{
 			GameManager.instance.EndGame();
 		}
+
 	}
+
+
 }
