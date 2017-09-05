@@ -35,17 +35,31 @@ public class UI : MonoBehaviour {
 
     public PlayerVisuals visuals;
 
+	public GameObject lapPanel;
+
 	public Text lapCompteur;
 
 	public Animator arrowRight;
 
 	public Animator arrowLeft;
 
+
+
 	bool canChangeLap = true;
 
     // Use this for initialization
     void Start () 
 	{
+
+		if ( GameManager.instance.nbrOfLap < 10 )
+		{
+			lapCompteur.text = "0"+GameManager.instance.nbrOfLap.ToString();
+		}
+		else
+		{
+			lapCompteur.text = GameManager.instance.nbrOfLap.ToString();
+		}
+
 		playerSorts.Clear();
 
 		DisplayPressA();
@@ -79,11 +93,11 @@ public class UI : MonoBehaviour {
 
 		if(canChangeLap)
 		{
-			if(GamepadManager.Instance.GetButtonDownAny("X"))
+			if(GamepadManager.Instance.GetButtonDownAny("B"))
 			{
 				AddTurn(true);
 			}
-			else if(GamepadManager.Instance.GetButtonDownAny("B"))
+			else if(GamepadManager.Instance.GetButtonDownAny("X"))
 			{
 				AddTurn(false);
 			}
@@ -128,6 +142,7 @@ public class UI : MonoBehaviour {
 
 	public void WaitForCompt()
 	{
+		lapPanel.SetActive(false);
 		canChangeLap = false;
 		pressAPanels.SetActive(false);
 		Invoke("DisplayGamePanel", 4);
@@ -198,22 +213,25 @@ public class UI : MonoBehaviour {
 
 	void AddTurn(bool _add)
 	{
-		arrowLeft.SetTrigger("Move");
-		arrowRight.SetTrigger("Move");
-
 		if (_add)
 		{
 			GameManager.instance.nbrOfLap++;
 
-			if(GameManager.instance.nbrOfLap>99)
+			arrowRight.SetTrigger("Move");
+
+			if (GameManager.instance.nbrOfLap>99)
 			{
 				GameManager.instance.nbrOfLap = 1;
 			}
+
+			
 
 		}
 		else
 		{
 			GameManager.instance.nbrOfLap--;
+
+			arrowLeft.SetTrigger("Move");
 
 			if ( GameManager.instance.nbrOfLap < 1 )
 			{
@@ -221,7 +239,14 @@ public class UI : MonoBehaviour {
 			}
 		}
 
-
+		if ( GameManager.instance.nbrOfLap < 10 )
+		{
+			lapCompteur.text = "0" + GameManager.instance.nbrOfLap.ToString();
+		}
+		else
+		{
+			lapCompteur.text = GameManager.instance.nbrOfLap.ToString();
+		}
 
 	}
 
