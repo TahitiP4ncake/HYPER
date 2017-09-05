@@ -499,7 +499,7 @@ public class Player : MonoBehaviour {
 
 		SpeedCalcul();
 
-		
+		gamepad.AddRumble(0.5f, Vector2.one, 1);
 
 
 		visual.PlayAnimation(AnimationState.Bonus);
