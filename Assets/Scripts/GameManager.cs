@@ -71,6 +71,11 @@ public class GameManager : MonoBehaviour
 
     public void AddPlayer(int _playerIndex, int _gpIndex)
 	{
+		if(nbrPlayer == 0)
+		{
+			ui.lapPanel.SetActive(true);
+		}
+
 		players [_playerIndex].gameObject.SetActive(true);
 
 		players [_playerIndex].SetPlayer(_playerIndex, _gpIndex);
