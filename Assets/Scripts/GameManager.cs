@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     GamepadManager manager;
 
+    public CameraLerp cam;
+
 
 	void Awake( )
 	{
@@ -136,6 +138,10 @@ public class GameManager : MonoBehaviour
 			{
 				_player.AddSpeedTime(speedByTime);
 			}
+            if (!gameOver)
+            {
+                cam.speed += .05f;
+            }
 
 		}
 	}
@@ -148,7 +154,7 @@ public class GameManager : MonoBehaviour
         if(!flashed)
         StartCoroutine(FlashTimer());
         gameOver = true;
-
+        cam.speed = 1;
 
 		foreach ( Player _player in players )
 		{
