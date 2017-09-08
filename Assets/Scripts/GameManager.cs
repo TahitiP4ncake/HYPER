@@ -187,6 +187,7 @@ public class GameManager : MonoBehaviour
         restartText.gameObject.SetActive(true);
     }
 
+
   
 
 }
