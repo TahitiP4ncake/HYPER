@@ -88,7 +88,10 @@ public class CreatePlayer : MonoBehaviour {
 		
 		if ( playerActive > 1 )
 		{
-            pressStart.gameObject.SetActive(true);
+            if (!pressStart.gameObject.activeInHierarchy)
+            {
+                pressStart.gameObject.SetActive(true);
+            }
 			if ( manager.GetButtonDownAny("Start") )
 			{
 				
@@ -99,7 +102,8 @@ public class CreatePlayer : MonoBehaviour {
 
 	void LaunchRace()
 	{
-        pressStart.gameObject.SetActive(false);
+
+        pressStart.text = "";
 		isLaunched = true;
 		GameManager.instance.StartRace();
 	}

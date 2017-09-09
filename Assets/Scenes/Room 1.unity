@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -5195,10 +5195,11 @@ MonoBehaviour:
   - {fileID: 1152888093}
   - {fileID: 666061642}
   - {fileID: 1573520624}
-  nbrOfLap: 5
+  nbrOfLap: 20
   ui: {fileID: 1412360731}
   timer: {fileID: 670928913}
   restartText: {fileID: 2020268965}
+  cam: {fileID: 1516362467}
 --- !u!4 &1412360730
 Transform:
   m_ObjectHideFlags: 0
@@ -5736,6 +5737,12 @@ Transform:
   m_Father: {fileID: 1152888094}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1516362467 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114279984304861090, guid: 5aaa23f57b22ff04f8fb074076992373,
+    type: 2}
+  m_PrefabInternal: {fileID: 414269502}
+  m_Script: {fileID: 11500000, guid: cb08e79b1f797424ab3fa56f1d8ed605, type: 3}
 --- !u!1 &1548061123
 GameObject:
   m_ObjectHideFlags: 0
