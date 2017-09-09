@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour
     public CameraLerp cam;
 
 
+    public GameObject pauseMenu;
+    bool onPause;
+
+
 	void Awake( )
 	{
 
@@ -68,6 +72,7 @@ public class GameManager : MonoBehaviour
         a_theme = Harmony.SetSource("theme1");
         a_theme.loop = true;
         Harmony.Play(a_theme);
+        manager = GamepadManager.Instance;
     }
 
 
@@ -107,7 +112,7 @@ public class GameManager : MonoBehaviour
 
 	}
 
-    private void Update()
+     void Update()
     {
         if(gameOver)
         {
@@ -119,6 +124,36 @@ public class GameManager : MonoBehaviour
             }
             
         }
+
+
+
+        if(manager.GetButtonDownAny("Start") )
+        {
+            switch (onPause)
+            {
+                case false:
+                    StartCoroutine(PauseOn());
+                    break;
+                case true:
+                    StartCoroutine(PauseOff());
+                    break;
+            }
+            
+        }
+
+        if (manager.GetButtonDownAny("Y") && onPause)
+        {
+            Time.timeScale = 1;
+            Scene _scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(_scene.buildIndex);
+        }
+
+        if (manager.GetButtonDownAny("Back") && onPause)
+        {
+            Application.Quit();
+        }
+
+
     }
 
     IEnumerator SpeedTime()
@@ -187,7 +222,24 @@ public class GameManager : MonoBehaviour
         restartText.gameObject.SetActive(true);
     }
 
-
+    IEnumerator PauseOn()
+    {
+        onPause = true;
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+        a_theme.volume = .3f;
+        a_theme.pitch = .8f;
+        yield return null;
+    }
+    IEnumerator PauseOff()
+    {
+        onPause = false;
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+        a_theme.volume = 1f;
+        a_theme.pitch = 1;
+        yield return null;
+    }
   
 
 }

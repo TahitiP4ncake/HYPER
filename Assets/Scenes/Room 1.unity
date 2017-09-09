@@ -226,6 +226,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 6802841}
   m_Script: {fileID: 11500000, guid: 6202f518c0861a74584a2cf4aee549f3, type: 3}
+--- !u!1 &16983052 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1392864875053902, guid: 778b715c4cf8820468b934c59354043c,
+    type: 2}
+  m_PrefabInternal: {fileID: 217965430}
 --- !u!1 &31701549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,11 +1297,6 @@ Prefab:
     - target: {fileID: 224539109911586590, guid: 778b715c4cf8820468b934c59354043c,
         type: 2}
       propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114860601695061716, guid: 778b715c4cf8820468b934c59354043c,
-        type: 2}
-      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5200,6 +5200,7 @@ MonoBehaviour:
   timer: {fileID: 670928913}
   restartText: {fileID: 2020268965}
   cam: {fileID: 1516362467}
+  pauseMenu: {fileID: 16983052}
 --- !u!4 &1412360730
 Transform:
   m_ObjectHideFlags: 0
