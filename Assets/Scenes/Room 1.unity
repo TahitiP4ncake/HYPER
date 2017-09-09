@@ -5195,7 +5195,7 @@ MonoBehaviour:
   - {fileID: 1152888093}
   - {fileID: 666061642}
   - {fileID: 1573520624}
-  nbrOfLap: 5
+  nbrOfLap: 20
   ui: {fileID: 1412360731}
   timer: {fileID: 670928913}
   restartText: {fileID: 2020268965}
