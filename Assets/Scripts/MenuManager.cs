@@ -67,6 +67,11 @@ public class MenuManager : MonoBehaviour {
             StartGame();
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
     }
 
     void BeforeStart()
