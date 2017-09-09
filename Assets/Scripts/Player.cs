@@ -272,8 +272,8 @@ public class Player : MonoBehaviour {
 			return;
 		}
 
-		StopAllCoroutines();
-		StartCoroutine(CooldowncanMove());
+		//StopAllCoroutines();
+		//StartCoroutine(CooldowncanMove());
 
 		gamepad.AddRumble(1, Vector2.one, 1);
 
@@ -468,6 +468,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	/*
 	IEnumerator CooldowncanMove()
 	{
 		canMove = false;
@@ -482,6 +483,7 @@ public class Player : MonoBehaviour {
 
 		canMove = true;
 	}
+	*/
 
 	IEnumerator Bonus()
 	{
